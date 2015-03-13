@@ -1,13 +1,16 @@
 # Ant properties for building the springapp
-
+#DO NOT CHECKIN THIS FILE, ANY CHANGES SHOULD BE DONE IN
+#build.properties.template FILE AND COMMITTED, USE this only 
+#localchanges.
 #appserver.home=${user.home}/apache-tomcat-6.0.14
-appserver.home=C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0
+#appserver.home=C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0
+appserver.home=/usr/share/tomcat7
 # for Tomcat 5 use $appserver.home}/server/lib
 # for Tomcat 6 use $appserver.home}/lib
 appserver.lib=${appserver.home}/lib
 
-deploy.path=${appserver.home}/webapps
+deploy.path=/var/lib/tomcat7/webapps
 
-tomcat.manager.url=http://localhost:8085/manager
+tomcat.manager.url=http://localhost:8080/manager/text
 tomcat.manager.username=tomcat
 tomcat.manager.password=tacmot

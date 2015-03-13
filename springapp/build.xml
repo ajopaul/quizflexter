@@ -135,7 +135,7 @@
     </target>
 
 	<target name="list" description="List Tomcat applications">
-	    <list url="${tomcat.manager.url}/text"
+	    <list url="${tomcat.manager.url}"
 	          username="${tomcat.manager.username}"
 	          password="${tomcat.manager.password}"/>
 	</target>
