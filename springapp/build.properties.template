@@ -1,7 +1,8 @@
-# Ant properties for building the springapp
-#DO NOT CHECKIN THIS FILE, ANY CHANGES SHOULD BE DONE IN
-#build.properties.template FILE AND COMMITTED, USE this only 
-#localchanges.
+# Ant properties template file for building the springapp
+#save a copy of this file and rename it to build.properties for local 
+#changes
+
+
 #appserver.home=${user.home}/apache-tomcat-6.0.14
 #appserver.home=C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0
 appserver.home=/usr/share/tomcat7
