@@ -7,9 +7,14 @@ var scotchApp = angular.module('scotchApp',['ngRoute']);
 scotchApp.config(function($routeProvider){
 	$routeProvider
 	
-	.when('/',{
+	.when('/home',{
 		templateUrl : 'pages/home.html',
 		controller : 'mainController'
+	})
+	
+	.when('/settings',{
+		templateUrl : 'pages/settings.html',
+		controller : 'settingsController'
 	})
 	
 	.when('/about',{
@@ -17,35 +22,75 @@ scotchApp.config(function($routeProvider){
 		controller : 'aboutController'
 	})
 	
-	.when('/contact',{
-		templateUrl : 'pages/contact.html',
-		controller : 'contactController'
+	.when('/help',{
+		templateUrl : 'pages/help.html',
+		controller : 'helpController'
 	})
 	
-	.when('/sampledata',{
-		templateUrl : 'pages/sampledata.html',
-		controller : 'sampleDataController'
+	.when('/programs',{
+		templateUrl : 'pages/programs.html',
+		controller : 'programsController'
+	})
+	
+	.when('/clients',{
+		templateUrl : 'pages/clients.html',
+		controller : 'clientsController'
+	})
+	
+	.when('/events',{
+		templateUrl : 'pages/events.html',
+		controller : 'eventsController'
 	});
+	
 	
 });
 
 //create the controller and inject Angular's $scope
 scotchApp.controller('mainController',function($scope){
 	//create a message to display in our view
-	$scope.message = "Everyone come and see how good I look!'"
+	$scope.message = "Home page under construction!"
 });
 
 //create the controller and inject Angular's $scope
 scotchApp.controller('aboutController',function($scope){
 	//create a message to display in our view
-	$scope.message = "Everyone come and see how good I look in about page!'"
+	
+	$scope.message = "About page under construction!"
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('contactController',function($scope){
+scotchApp.controller('settingsController',function($scope){
 	//create a message to display in our view
-	$scope.message = "Everyone come and see how good I look contact me page!'"
+	$scope.message = "Settings page under construction"
+		
 });
+
+scotchApp.controller('helpController',function($scope){
+	//create a message to display in our view
+	$scope.message = "Help page under construction"
+		
+});
+
+scotchApp.controller('programsController',function($scope){
+	//create a message to display in our view
+	$scope.class ="active";
+	$scope.message = "Programs page under construction"
+		
+});
+
+scotchApp.controller('clientsController',function($scope){
+	//create a message to display in our view
+	$scope.message = "Clients page under construction"
+		
+});
+
+scotchApp.controller('eventsController',function($scope){
+	//create a message to display in our view
+	$scope.message = "Events page under construction"
+		
+});
+
+
 
 //create the controller and inject Angular's $scope
 scotchApp.controller('sampleDataController',function($scope,$http){
