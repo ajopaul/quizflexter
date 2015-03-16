@@ -2,19 +2,25 @@ package com.ajopaul.web.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.ajopaul.pojos.ProgramBeanUtils;
 
 public class ResponseServlet extends HttpServlet
 { 
-    
+	Logger log = Logger.getLogger(getClass().getSimpleName());
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
                                                                            IOException
@@ -23,22 +29,7 @@ public class ResponseServlet extends HttpServlet
         doListPrograms(req,resp);
       }else{
 
-        req.setCharacterEncoding("utf8");
-        resp.setCharacterEncoding("utf8");
-        resp.setContentType("application/json"); 
-        PrintWriter out = resp.getWriter(); 
-
-        Map<String,Object> map = new HashMap<String,Object>();
-        map.put("Region", "West");
-        map.put("Category", "Retail");
-
-
-
-        JSONObject obj = new JSONObject(map);
-        obj.put("message","hello" );
-        System.out.append("Printing Map ");
-        System.out.println(obj.toString());
-        out.print(obj);
+        //Currently do nothing, nada
       }
     }
     
@@ -49,15 +40,24 @@ public class ResponseServlet extends HttpServlet
      * @throws IOException 
      */
     
-    private void doListPrograms(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    protected void doListPrograms(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-      Map<String,Object> data = new HashMap<String,Object>();
-      data.put("programs1", "Program One,1,Client One");
-      data.put("programs2", "Program Two,2,Client Two");
-      data.put("programs3", "Program Three,3,Client Three");
-      JSONObject obj = new JSONObject(data);
+     //Create a list of ProgramBeans
+      List<Object> list = new ArrayList<Object>();
+      list.add(ProgramBeanUtils.getProgramBean("Prog One",100 , "One Client"));
+      list.add(ProgramBeanUtils.getProgramBean("Prog Two",200 , "Two Client"));
+      list.add(ProgramBeanUtils.getProgramBean("Prog Three",300 , "Three Client"));
+      //Create a JSONArray
+      JSONArray arry = new JSONArray(list);
       PrintWriter out = resp.getWriter();
-      out.print(obj);
+      out.print(arry.toString());
+      log.info("JSon data\n"+arry.toString());
+      //Sample JSon output
+      /*
+       [{"priority":100,"clients":"One Client","programName":"Prog One"},{"priority":200,"clients":"Two Client","programName":"Prog Two"},
+       {"priority":300,"clients":"Three Client","programName":"Prog Three"}]
+
+       */
     }
 
     @Override
