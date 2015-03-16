@@ -1,12 +1,70 @@
-<!-- contact.html -->
- <form role="form">
-    <div class="form-group">
-      <label for="program-name">Program Name:</label>
-      <input type="text" class="form-control" id="program-name" placeholder="Enter program name">
-    </div>
-    <div class="form-group">
-      <label for="program-type">Program Type:</label>
-      <input type="text" class="form-control" id="program-type" placeholder="Enter program type">
-    </div>
-    <button type="submit" class="btn btn-primary">Create Program</button>
-  </form> 
+<a class="btn btn-primary" href="#addProgram" role="button"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+<table class="table table-bordered">
+
+ <thead>
+        <tr>
+          <th>#</th>
+          <th>Program Name</th>
+          <th>Priority</th>
+          <th>Clients</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+       <th scope="row">1</th>
+        <td>{{ program11 }}</td>
+          <td>{{ program12 }}</td>
+          <td>{{ program13 }}</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>{{ program21 }}</td>
+          <td>{{ program22 }}</td>
+          <td>{{ program23 }}</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>{{ program31 }}</td>
+          <td>{{ program32 }}</td>
+          <td>{{ program33 }}</td>
+        </tr> 
+      </tbody>
+    </table>
+    <p>
+  
+
+ <!-- <td>{{ program1.1 }}</td>
+          <td>{{ program1.2 }}</td>
+          <td>{{ program1.3 }}</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>{{ program2.1 }}</td>
+          <td>{{ program2.2 }}</td>
+          <td>{{ program2.3 }}</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>{{ program3.1 }}</td>
+          <td>{{ program3.2 }}</td>
+          <td>{{ program3.3 }}</td>
+        </tr> -->
+        
+       <!--  <tr>
+          <th scope="row">1</th>
+          <td>Program One</td>
+          <td>1</td>
+          <td>Client One</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Program One</td>
+          <td>1</td>
+          <td>Client One</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Program One</td>
+          <td>1</td>
+          <td>Client One</td>
+        </tr> -->
