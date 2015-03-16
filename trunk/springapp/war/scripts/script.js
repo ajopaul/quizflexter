@@ -83,33 +83,11 @@ scotchApp.controller('createProgramsController',function($scope){
 		
 });
 scotchApp.controller('programsController',function($scope,$http){
-	
+	$scope.programs = [];	
 	 $http.get('responseservlet?listPrograms=true').
 	    success(function(data, status, headers, config) {
-	    /*  //$scope.posts = data;
-	      $scope.region = data.Region;
-	      $scope.category = data.Category;
-	      $scope.message = data.message;*/
-	    	var programs1 = data.programs1.split(",");
-	    		    	alert(programs1);
-	    	$scope.program11=programs1[0];
-	    	$scope.program12=programs1[1];
-	    	$scope.program13=programs1[2];
-	    	
-	    	var programs2 = data.programs2.split(",");
-	    	
-	    	$scope.program21=programs1[0];
-	    	$scope.program22=programs1[1];
-	    	$scope.program23=programs1[2];
-	    	
-	    	var programs3 = data.programs3.split(",");
-	    	
-	    	$scope.program31=programs1[0];
-	    	$scope.program32=programs1[1];
-	    	$scope.program33=programs1[2];
-	    	
-	    	
-	    	
+	    	$scope.programs = data;	
+	    	    	
 	    }).
 	    error(function(data, status, headers, config) {
 	      // log error
