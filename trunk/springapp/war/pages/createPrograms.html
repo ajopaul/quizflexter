@@ -1,12 +1,16 @@
 <!-- contact.html -->
- <form role="form">
+ <form role="form" ng-submit="submitMyForm()">
     <div class="form-group">
       <label for="program-name">Program Name:</label>
-      <input type="text" class="form-control" id="program-name" placeholder="Enter program name">
+      <input type="text" class="form-control" id="program-name" placeholder="Enter program name" ng-model="programs.programName">
     </div>
     <div class="form-group">
-      <label for="program-type">Program Type:</label>
-      <input type="text" class="form-control" id="program-type" placeholder="Enter program type">
+      <label for="program-priority">Program Priority:</label>
+      <input type="text" class="form-control" id="program-priority" placeholder="Enter program priority" ng-model="programs.priority">
+    </div>
+    <div class="form-group">
+      <label for="program-clients">Program Clients:</label>
+      <input type="text" class="form-control" id="program-clients" placeholder="Enter clients" ng-model="programs.clients">
     </div>
     <button type="submit" class="btn btn-primary">Create Program</button>
   </form> 

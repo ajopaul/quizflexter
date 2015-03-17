@@ -12,6 +12,15 @@
   	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
   	<property name="prefix" value="/WEB-INF/jsp/"></property>
   	<property name="suffix" value=".jsp"></property>
-  </bean>
+  </bean> 
+  
+  
+   <!-- <bean
+        class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    <bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+    <bean name="viewResolver" 
+        class="org.springframework.web.servlet.view.XmlViewResolver" /> -->
 
 </beans>
