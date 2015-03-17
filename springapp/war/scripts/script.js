@@ -77,10 +77,15 @@ scotchApp.controller('helpController',function($scope){
 });
 
 
-scotchApp.controller('createProgramsController',function($scope){
-	//create a message to display in our view
-	$scope.message = "Help page under construction"
-		
+scotchApp.controller('createProgramsController',function($scope,$http){
+
+	
+		$scope.submitMyForm=function(){
+        /* while compiling form , angular created this object*/
+        var data=$scope.programs;  
+        /* post to server*/
+        $http.post('responseservlet?addProgram=true', data);        
+    }	
 });
 scotchApp.controller('programsController',function($scope,$http){
 	$scope.programs = [];	

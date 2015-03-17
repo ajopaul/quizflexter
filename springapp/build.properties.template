@@ -3,7 +3,7 @@
 #changes
 
 
-#appserver.home=${user.home}/apache-tomcat-6.0.14
+#appserver.home=${user.home}/apache-tomcat-6.0.14/we9bx8Hu7Eu3
 #appserver.home=C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0
 appserver.home=/usr/share/tomcat7
 # for Tomcat 5 use $appserver.home}/server/lib
