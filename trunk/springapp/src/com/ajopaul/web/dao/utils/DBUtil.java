@@ -8,23 +8,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.ajopaul.pojos.ProgramBean;
 import com.ajopaul.pojos.ProgramBeanUtils;
 
 public class DBUtil {
+	private static Logger log = Logger.getLogger("DBUtil");
 	/**
 	 * Get the connection using sqlite jdbc driver
 	 * @return
 	 */
-	public static Connection getDatabaseConnection() {
+	public static Connection getDatabaseConnection(String dbQuery) {
 		
 		Connection connection = null;
 	    try {
 	      Class.forName("org.sqlite.JDBC");
 	      //connection = DriverManager.getConnection("jdbc:sqlite:springdb.db");
 	      ///home/bigdata/workspace/
-	       connection = DriverManager.getConnection("jdbc:sqlite:/var/lib/tomcat7/webapps/springapp/sqlitedb/springdb.db");
+	       connection = DriverManager.getConnection(dbQuery);
 	    //  connection = DriverManager.getConnection("jdbc:sqlite:sqlitedb/springdb.db");
 	    } catch ( Exception e ) {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -91,6 +93,8 @@ public class DBUtil {
 			pStmt.setInt(2, bean.getPriority());
 			pStmt.setString(3, bean.getClients());
 			result = pStmt.executeUpdate();
+			log.info("finished inserting data");
+			System.out.println("Finished inserting yo!");
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

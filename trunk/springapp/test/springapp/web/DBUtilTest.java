@@ -18,9 +18,10 @@ import com.ajopaul.web.dao.utils.DBUtil;
 public class DBUtilTest extends TestCase{
 	
 	Connection connection = null;
+	String dbQuery = "jdbc:sqlite:/home/ajopaul/dbfiles/springdb2.db";
 	@Override
 	protected void setUp() throws Exception {
-		connection = DBUtil.getDatabaseConnection();
+		connection = DBUtil.getDatabaseConnection(dbQuery);
 		super.setUp();
 	}
 	
@@ -33,12 +34,12 @@ public class DBUtilTest extends TestCase{
 	}
 	
 	public void testGetDatabaseConnection(){
-		connection = DBUtil.getDatabaseConnection();
+		connection = DBUtil.getDatabaseConnection(dbQuery);
 		assertNotNull("Message Not null", connection);
 	}
 	
 	public void testSpringDbProgramsTableData(){
-		Connection connection = DBUtil.getDatabaseConnection();
+		Connection connection = DBUtil.getDatabaseConnection(dbQuery);
 		try {
 			Statement stmnt = connection.createStatement();
 			ResultSet rs = stmnt.executeQuery("select * from programs");
