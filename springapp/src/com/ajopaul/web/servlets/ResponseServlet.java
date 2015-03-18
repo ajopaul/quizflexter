@@ -21,6 +21,8 @@ import com.google.gson.Gson;
 public class ResponseServlet extends HttpServlet
 { 
 	Logger log = Logger.getLogger(getClass().getSimpleName());
+	
+	String dbQuery = "jdbc:sqlite:/home/ajopaul/dbfiles/springdb2.db";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
                                                                            IOException
@@ -30,7 +32,11 @@ public class ResponseServlet extends HttpServlet
       }else if(null != req.getParameter("addProgram")){
     	doAddProgram(req, resp);
       }else{
+    	  try{
     	  doAddProgram(req, resp);
+    	  }catch(Exception e){
+    		  e.printStackTrace();
+    	  }
       }
     }
     
@@ -49,7 +55,7 @@ public class ResponseServlet extends HttpServlet
       list.add(ProgramBeanUtils.getProgramBean("Prog Two",200 , "Two Client"));
       list.add(ProgramBeanUtils.getProgramBean("Prog Three",300 , "Three Client"));*/
     	  log.info("Requested for data ");
-    	  Connection connection = DBUtil.getDatabaseConnection();
+    	  Connection connection = DBUtil.getDatabaseConnection(dbQuery);
     	  if(null != connection){
     		  List<Object> list = DBUtil.getProgramBeansFromDB(connection, "Select * from programs");
     		  //Create a JSONArray
@@ -86,11 +92,13 @@ public class ResponseServlet extends HttpServlet
         log.info("Post data "+data);
         Gson gson = new Gson();
         ProgramBean bean = gson.fromJson(data, ProgramBean.class);
-        Connection connection = DBUtil.getDatabaseConnection();
+        Connection connection = DBUtil.getDatabaseConnection(dbQuery);
         if(null != connection){
         	boolean result = DBUtil.insertProgramBeanData(connection, bean);
         	log.info("DB Write status: "+result);
         	DBUtil.closeAll(connection, null, null);
+        }else{
+        	log.severe("Connection is null");
         }
         		
     }
