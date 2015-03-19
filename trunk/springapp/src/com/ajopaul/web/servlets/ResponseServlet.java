@@ -22,7 +22,7 @@ public class ResponseServlet extends HttpServlet
 { 
 	Logger log = Logger.getLogger(getClass().getSimpleName());
 	
-	String dbQuery = "jdbc:sqlite:/home/ajopaul/dbfiles/springdb2.db";
+	String dbQuery = "jdbc:sqlite:/dbfiles/springdb.db";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
                                                                            IOException

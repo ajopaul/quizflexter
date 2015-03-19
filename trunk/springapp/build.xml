@@ -180,5 +180,6 @@
 	            ***********************************************************
 	        </fail>
 	    </target>
+		<target name="redeploy" depends="deploy,reload"/>
 
 </project>
