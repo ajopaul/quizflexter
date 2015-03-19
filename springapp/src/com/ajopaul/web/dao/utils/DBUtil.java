@@ -1,6 +1,7 @@
 package com.ajopaul.web.dao.utils;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public class DBUtil {
 	/**
 	 * Get the connection using sqlite jdbc driver
 	 * @return
-	 */
+	 *///dbQuery = "jdbc:sqlite:springdb.db";
 	public static Connection getDatabaseConnection(String dbQuery) {
 		
 		Connection connection = null;
@@ -30,7 +31,7 @@ public class DBUtil {
 	    //  connection = DriverManager.getConnection("jdbc:sqlite:sqlitedb/springdb.db");
 	    } catch ( Exception e ) {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	     // System.exit(0);
+	      e.printStackTrace();
 	    }
 	  
 		return connection;
@@ -38,16 +39,57 @@ public class DBUtil {
 	
 	public static Object getResultSetData(Connection connection,String query){
 		Statement stmnt = null;
-		ResultSet rs = null;;
+		ResultSet rs = null;
+		boolean result = checkIfTableExists(connection);
+		if(!result){
+			createTables(connection);
+		}
 		try {
 			stmnt = connection.createStatement();
-			rs = stmnt.executeQuery("select * from programs");
+			rs = stmnt.executeQuery(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return rs;
+	}
+	
+	/**
+	 * Create tables.
+	 */
+	public static void createTables(Connection connection) {
+		    String sqlCreate = "CREATE TABLE IF NOT EXISTS " + "programs"
+		            + "  (program_name          TEXT,"
+		            + "   priority            NUMERIC,"
+		            + "   clients          TEXT)";
+
+		    Statement stmt;
+			try {
+				stmt = connection.createStatement();
+				stmt.execute(sqlCreate);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+	}
+
+/**
+ * Check if the programs table exists`
+ * @param connection
+ */
+	public static boolean checkIfTableExists(Connection connection) {
+		boolean result = false;
+		try{
+		DatabaseMetaData dbm = connection.getMetaData();
+		
+	    ResultSet rs = dbm.getTables(null, null, "programs", null);
+	      result = rs.next();
+		}catch(Exception e){
+			log.severe("Cannot check if table exists");
+			e.printStackTrace();
+		}
+	    return result;		
 	}
 
 	/**

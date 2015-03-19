@@ -6,10 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import junit.framework.TestCase;
+
+import org.json.JSONObject;
 
 import com.ajopaul.pojos.ProgramBean;
 import com.ajopaul.pojos.ProgramBeanUtils;
@@ -18,7 +17,7 @@ import com.ajopaul.web.dao.utils.DBUtil;
 public class DBUtilTest extends TestCase{
 	
 	Connection connection = null;
-	String dbQuery = "jdbc:sqlite:/home/ajopaul/dbfiles/springdb2.db";
+	String dbQuery = "jdbc:sqlite:springdbfile.db";
 	@Override
 	protected void setUp() throws Exception {
 		connection = DBUtil.getDatabaseConnection(dbQuery);
@@ -84,6 +83,11 @@ public class DBUtilTest extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void testCheckIfTablesExist(){
+		DBUtil.createTables(connection);
+		assertTrue(DBUtil.checkIfTableExists(connection));
 	}
 	
 	public void testJsonData(){
