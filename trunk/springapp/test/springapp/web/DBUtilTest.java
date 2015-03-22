@@ -86,7 +86,7 @@ public class DBUtilTest extends TestCase{
 	}
 	
 	public void testCheckIfTablesExist(){
-		DBUtil.createTables(connection);
+		DBUtil.createTables(connection,"programs");
 		assertTrue(DBUtil.checkIfTableExists(connection));
 	}
 	
