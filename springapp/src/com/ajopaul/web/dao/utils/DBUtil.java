@@ -42,7 +42,7 @@ public class DBUtil {
 		ResultSet rs = null;
 		boolean result = checkIfTableExists(connection);
 		if(!result){
-			createTables(connection);
+			createTables(connection,"programs");
 		}
 		try {
 			stmnt = connection.createStatement();
@@ -57,8 +57,8 @@ public class DBUtil {
 	/**
 	 * Create tables.
 	 */
-	public static void createTables(Connection connection) {
-		    String sqlCreate = "CREATE TABLE IF NOT EXISTS " + "programs"
+	public static void createTables(Connection connection,String tableName) {
+		    String sqlCreate = "CREATE TABLE IF NOT EXISTS " + tableName
 		            + "  (program_name          TEXT,"
 		            + "   priority            NUMERIC,"
 		            + "   clients          TEXT)";

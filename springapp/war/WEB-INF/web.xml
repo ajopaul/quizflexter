@@ -17,6 +17,11 @@
     <servlet-class>com.ajopaul.web.servlets.ResponseServlet</servlet-class>    
   </servlet>
 
+ <servlet>
+    <servlet-name>tinymeservlet</servlet-name>
+    <servlet-class>com.ajopaul.web.servlets.TinyMeServlet</servlet-class>    
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>springapp</servlet-name>
     <url-pattern>*.htm</url-pattern>
@@ -27,6 +32,9 @@
     <url-pattern>/responseservlet</url-pattern>
   </servlet-mapping>
 
-
+  <servlet-mapping>
+    <servlet-name>tinymeservlet</servlet-name>
+    <url-pattern>/tinyme</url-pattern>
+  </servlet-mapping>
  
 </web-app>

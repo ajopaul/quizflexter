@@ -1,10 +1,10 @@
 //script.js
 
-//create the module and name it scotchApp
+//create the module and name it tinyMeApp
 //include ngRoute for routing needs
-var scotchApp = angular.module('scotchApp',['ngRoute']);
+var tinyMeApp = angular.module('tinyMeApp',['ngRoute']);
 
-scotchApp.config(function($routeProvider){
+tinyMeApp.config(function($routeProvider){
 	$routeProvider
 	
 	.when('/home',{
@@ -51,33 +51,46 @@ scotchApp.config(function($routeProvider){
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('mainController',function($scope){
+tinyMeApp.controller('mainController',function($scope,$http){
 	//create a message to display in our view
-	$scope.message = "Home page under construction!"
+	//$scope.message = "Home page under construction!"
+	$scope.submitMyForm=function(){
+		var data=$scope.url;
+		//alert(data.inputUrl);
+		 $http.get('tinyme?inputUrl='+data.inputUrl).
+		    success(function(data, status, headers, config) {
+		    	//$scope.programs = data;	
+		    	//alert("target "+data.target);
+		    	    $scope.message = 'Tiny Url: '+data.target;	
+		    }).
+		    error(function(data, status, headers, config) {
+		      // log error
+		    }); 
+    }	
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('aboutController',function($scope){
+tinyMeApp.controller('aboutController',function($scope){
 	//create a message to display in our view
 	
 	$scope.message = "About page under construction!"
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('settingsController',function($scope){
+tinyMeApp.controller('settingsController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Settings page under construction"
 		
 });
 
-scotchApp.controller('helpController',function($scope){
+tinyMeApp.controller('helpController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Help page under construction"
 		
 });
 
 
-scotchApp.controller('createProgramsController',function($scope,$http){
+tinyMeApp.controller('createProgramsController',function($scope,$http){
 
 	
 		$scope.submitMyForm=function(){
@@ -92,7 +105,7 @@ scotchApp.controller('createProgramsController',function($scope,$http){
         	});        
     }	
 });
-scotchApp.controller('programsController',function($scope,$http){
+tinyMeApp.controller('programsController',function($scope,$http){
 	$scope.programs = [];	
 	 $http.get('responseservlet?listPrograms=true').
 	    success(function(data, status, headers, config) {
@@ -106,13 +119,13 @@ scotchApp.controller('programsController',function($scope,$http){
 		
 });
 
-scotchApp.controller('clientsController',function($scope){
+tinyMeApp.controller('clientsController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Clients page under construction"
 		
 });
 
-scotchApp.controller('eventsController',function($scope){
+tinyMeApp.controller('eventsController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Events page under construction"
 		
@@ -121,7 +134,7 @@ scotchApp.controller('eventsController',function($scope){
 
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('sampleDataController',function($scope,$http){
+tinyMeApp.controller('sampleDataController',function($scope,$http){
 	//create a message to display in our view
 	
 
