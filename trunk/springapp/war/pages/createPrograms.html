@@ -1,15 +1,109 @@
- <form role="form" ng-submit="submitMyForm()">
-    <div class="form-group">
-      <label for="program-name">Program Name:</label>
-      <input type="text" class="form-control" id="program-name" placeholder="Enter program name" ng-model="programs.programName">
+
+<form class="form-horizontal" ng-submit="submitMyForm()">
+	<!-- <div class="form-group">
+  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
     </div>
-    <div class="form-group">
-      <label for="program-priority">Program Priority:</label>
-      <input type="text" class="form-control" id="program-priority" placeholder="Enter program priority" ng-model="programs.priority">
-    </div>
-    <div class="form-group">
-      <label for="program-clients">Program Clients:</label>
-      <input type="text" class="form-control" id="program-clients" placeholder="Enter clients" ng-model="programs.clients">
-    </div>
-    <button type="submit" class="btn btn-primary">Create Program</button>
-  </form> 
+  </div> -->
+	<div class="form-group">
+		<label for="program-name" class="col-sm-2 control-label">Program
+			Name</label>
+		<div class="col-xs-3">
+			<input type="text" class="form-control" id="program-name"
+				placeholder="Enter program name" ng-model="programs.programName">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="program-priority" class="col-sm-2 control-label">Short
+			Name</label>
+		<div class="col-xs-2">
+			<input type="text" class="form-control" id="program-priority"
+				placeholder="Enter short name" ng-model="programs.priority">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="program-priority" class="col-sm-2 control-label">Utility
+			Name</label>
+		<div class="col-xs-2">
+			<input type="text" class="form-control" id="program-priority"
+				placeholder="Enter program priority" ng-model="programs.priority">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="program-clients" class="col-sm-2 control-label">Program
+			Type</label>
+		<p>
+		<div class="btn-group col-xs-2" dropdown >
+			<button type="button" class="btn btn-danger">Level</button>
+			<button type="button" class="btn btn-danger dropdown-toggle"
+				dropdown-toggle>
+				<span class="caret"></span> <span class="sr-only">Split
+					button!</span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="#">Level</a></li>
+				<li><a href="#">Delta</a></li>
+				<li><a href="#">Duty Cycle</a></li>
+				<li><a href="#">Multiplier</a></li>
+				<li><a href="#">Price</a></li>
+				<li><a href="#">Price Multiplier</a></li>
+				<li><a href="#">Price Relative</a></li>
+				<li><a href="#">Product</a></li>
+
+				<li class="divider"></li>
+				<li><a href="#">Set Point</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="program-priority" class="col-sm-2 control-label">Priority</label>
+		<div class="col-xs-2">
+			<input type="text" class="form-control" id="program-priority"
+				placeholder="Enter program priority" ng-model="programs.priority">
+		</div>
+	</div>
+	
+	
+	<div class="form-group">
+		<label for="program-clients" class="col-sm-2 control-label">Program
+			Type</label>
+		<p>
+		<div class="btn-group col-xs-2" dropdown >
+			<button type="button" class="btn btn-danger">Level</button>
+			<button type="button" class="btn btn-danger dropdown-toggle"
+				dropdown-toggle>
+				<span class="caret"></span> <span class="sr-only">Split
+					button!</span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="#">Level</a></li>
+				<li><a href="#">Delta</a></li>
+				<li><a href="#">Duty Cycle</a></li>
+				<li><a href="#">Multiplier</a></li>
+				<li><a href="#">Price</a></li>
+				<li><a href="#">Price Multiplier</a></li>
+				<li><a href="#">Price Relative</a></li>
+				<li><a href="#">Product</a></li>
+
+				<li class="divider"></li>
+				<li><a href="#">Set Point</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	
+	<div class="form-group">
+		<label for="program-priority" class="col-sm-2 control-label">Description</label>
+		<div class="col-xs-2">
+			<textarea class="form-control" rows="2"
+				placeholder="Enter program description "></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary">Create</button>
+		</div>
+	</div>
+
+</form>
