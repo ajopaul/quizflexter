@@ -14,7 +14,7 @@ public class TinyMeMgrImpl implements TinyMeMgr{
 	public TinyMeMgrImpl(){
 		dao = TinyMeDAOFactory.getTinyMeDAO();
 		dao.init();
-		tinyMeUrlObj = new URLTinyMe();
+		tinyMeUrlObj = URLTinyMe.getInstance();
 	}
 	@Override
 	public void addTineyMeURL(String inputUrl, String tinyMeUrl) {
@@ -27,12 +27,12 @@ public class TinyMeMgrImpl implements TinyMeMgr{
 		int retryCount = 0;
 		tinyUrl = dao.getTinyMeURL(inputUrl);
 		if(null == tinyUrl){
-			tinyMeUrlObj.setInputUrl(inputUrl);
+		//	tinyMeUrlObj.setInputUrl(inputUrl);
 			
 			boolean resultFlag = false;
 			
 			do{
-			tinyUrl = tinyMeUrlObj.getTinyMeUrl();
+			tinyUrl = tinyMeUrlObj.getTinyMeUrl(inputUrl);
 			resultFlag = dao.addTineyMeURL(inputUrl, tinyUrl);
 			retryCount++;
 			}while(!resultFlag && retryCount < RETRY_MAX_COUNTER);

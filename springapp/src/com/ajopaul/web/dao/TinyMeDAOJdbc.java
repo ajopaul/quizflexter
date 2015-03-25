@@ -14,7 +14,7 @@ import com.ajopaul.web.dao.utils.DBUtil;
 public class TinyMeDAOJdbc implements TinyMeDAO{
 
 	Connection connection;
-	String dbQuery = "jdbc:sqlite:/dbfiles/tinyme.db";
+	String dbQuery = "jdbc:sqlite:tinyme.db";
 	
 	public TinyMeDAOJdbc(String dbQuery){
 	   this.dbQuery = dbQuery;

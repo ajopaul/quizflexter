@@ -20,7 +20,7 @@ public class TinyMeDAOJdbcTests extends TestCase {
 		dao = new TinyMeDAOJdbc(dbQuery);
 		connection = dao.getDatabaseConnection();
 		dao.createTables(connection, "tinymeurl");
-		tinyMeURL = new URLTinyMe();
+		tinyMeURL = URLTinyMe.getInstance();
 		super.setUp();
 	}
 	@Override
@@ -34,8 +34,7 @@ public class TinyMeDAOJdbcTests extends TestCase {
 	
 	public void testGetTinyUr()	{
 		String inputUrl = "https://www.google.com";
-		tinyMeURL.setInputUrl(inputUrl);
-		String tinyMeUrl = tinyMeURL.getTinyMeUrl();
+		String tinyMeUrl = tinyMeURL.getTinyMeUrl(inputUrl);
 		dao.addTineyMeURL(inputUrl, tinyMeUrl);
 
 		String tinyMeUrlDao = dao.getTinyMeURL(inputUrl);
