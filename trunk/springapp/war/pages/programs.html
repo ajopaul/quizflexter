@@ -4,19 +4,26 @@
 
  <thead>
         <tr>
-          <th>Program Name</th>
-          <th>Priority</th>
-          <th>Clients</th>
+          <th>Short Name</th>
+          <th>Description</th>
+          <th>Program Type</th>
+          <th>Customers</th>
+          <th>Resources</th>
+          <th>Shed(kW/kVA)</th>
+          <th>Action
         </tr>
       </thead>
       <tbody>      
 	     <tr ng-repeat="program in programs">
-	        <td>{{program.programName}}</td>
-	        <td>{{program.priority}}</td>
-	        <td>{{program.clients}}</td>
+	        <td>{{program.shortName}}</td>
+	        <td>{{program.description}}</td>
+	        <td>{{program.type}}</td>
+	        <td>{{program.customers}}</td>
+	        <td>{{program.resources}}</td>
+	        <td>{{program.shed}}</td>
+	        <td>{{link}}</td>
 	    </tr>
       </tbody>
     </table>
     <p>
   
-
