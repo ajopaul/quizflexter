@@ -1,7 +1,9 @@
 package com.ajopaul.ds;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Quiz {
@@ -139,10 +141,72 @@ public class Quiz {
 		return true;
 
 	}
+	
+	
+/*
+ 
+ Given three arrays sorted in non-decreasing order, print all common elements in these arrays. 
+Examples:
+ar1[] = {1, 5, 10, 20, 40, 80} 
+ar2[] = {6, 7, 20, 80, 100} 
+ar3[] = {3, 4, 15, 20, 30, 70, 80, 120} 
+Output: 20, 80 
+ar1[] = {1, 5, 5} 
+ar2[] = {3, 4, 5, 5, 10} 
+ar3[] = {5, 5, 10, 20} 
+Outptu: 5, 5
+ 
+ */
+ 
+	/*
+	 * Compare one array to another, for the first time compary first two arrays 
+	 * and find the common elements. Next time onwards use this common array to compare
+	 * the next array, repeat this till the last array.
+	 */
+	public static void printCommonElements(List<Integer[]> intArrays){
+	  if(null != intArrays){
+	    Integer commonArray[] = null;
+	    for(int i=0;i<intArrays.size();i++){
+	      if(null == commonArray){
+	        commonArray = intArrays.get(i);
+	      }
+	      if(i+1 != intArrays.size()){
+	        commonArray = getCommonElements(commonArray, intArrays.get(i+1));
+	      }
+	    }
+	    //Print the result.
+	    for(Integer val:commonArray){
+	      System.out.print(" "+val);
+	    }
+	  }
+	}
+
+	/*
+	 *Compare the two arrays and return the common elements amongst them.  
+	 */
+	public static Integer[] getCommonElements(Integer ar1[],Integer ar2[]){
+	  List<Integer> intArry = new ArrayList<Integer>();
+	  
+	  for(int i=0;i<ar1.length;i++){
+	    for(int j=0;j<ar2.length;j++){
+	      if(ar1[i] == ar2[j]){
+	        intArry.add(ar1[i]);	       
+	      }
+	    }
+	  }
+	  
+	  return intArry.toArray(new Integer[intArry.size()]);
+	}
 
 	public static void main(String... args){
 	//System.out.println(isStringUnique2("london"));
 		//System.out.println(reverse("tomcat"));
-	System.out.println(isStringPermutation3("london", "ldonnno"));
+	//System.out.println(isStringPermutation3("london", "ldonnno"));
+	 List<Integer[]> list = new ArrayList<>();
+	 list.add(new Integer[] {1, 5, 10, 20, 40, 80});
+	 list.add(new Integer[] {6, 7, 20, 80, 100,10});
+	 list.add(new Integer[] {3, 4, 15, 20, 30, 70, 80,10, 120} );
+	 list.add(new Integer[] {10,30,40,50,80,20} );
+	 printCommonElements(list);
 	}
 }
