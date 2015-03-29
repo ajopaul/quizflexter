@@ -1,11 +1,10 @@
+<!-- <div class="container">
+	<div class="row clearfix">
+		
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3">
 
 <form class="form-horizontal" ng-submit="submitMyForm()">
-	<!-- <div class="form-group">
-  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-    </div>
-  </div> -->
+
 	<div class="form-group">
 		<label for="program-name" class="col-sm-2 control-label">Program
 			Name</label>
@@ -107,3 +106,157 @@
 	</div>
 
 </form>
+	</div>
+		
+	</div>
+</div> -->
+
+
+<div class="container">
+	<div class="row clearfix">
+		
+		<!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3"> -->
+
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+				<legend>Create Program</legend>
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="selectbasic">Select
+						Program Type</label>
+					<div class="col-md-9">
+						<select id="selectbasic" name="selectbasic" class="form-control">
+							<option value="1">Level</option>
+							<option value="2">Delta</option>
+							<option value="3">Duty Cycle</option>
+							<option value="4">Multiplier</option>
+							<option value="2">Price</option>
+							<option value="3">Price Multiplier</option>
+							<option value="1">Price Relative</option>
+							<option value="2">Product</option>
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="textinput">Program
+						Name</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text"
+							placeholder="Enter program name" class="form-control input-md">
+					</div>
+					<label class="col-md-3 control-label" for="textinput">Short
+						Name</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text"
+							placeholder="Enter short name" class="form-control input-md">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="textinput">Utility
+						Name</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text"
+							placeholder="Enter utility name" class="form-control input-md">
+					</div>
+
+					<label class="col-md-3 control-label" for="textinput">Priority</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text"
+							placeholder="Enter priority" class="form-control input-md">
+					</div>
+
+				</div>
+
+				<div class="form-group">
+				 <label class="col-md-3 control-label" for="selectbasic">Select VEN Push Level</label>
+				  <div class="col-md-9">
+				    <select id="selectbasic" name="selectbasic" class="form-control">
+				      <option value="1">Min Event</option>
+				      <option value="2" selected>Full Event</option>
+				      <option value="3">All</option>
+				      
+				      
+				    </select>
+				  </div>
+				 </div>
+
+				
+				<div class="form-group">
+				<div class="col-md-3"></div>
+					<label class="checkbox-inline"><input type="checkbox" value="">Test Program</label>	
+					<label class="checkbox-inline"><input type="checkbox" value="">Emergency Dispatch</label>
+					<label class="checkbox-inline"><input type="checkbox" value="">Day Ahead Dispatch</label>
+					<label class="checkbox-inline"><input type="checkbox" value="">Commercial Program</label>
+				</div>
+				<!-- <div class="form-group">
+				
+				<div class="checkbox  col-md-3 control-label">
+					<label><input type="checkbox" value="">Day Ahead Dispatch</label>
+				</div>
+				<div class="checkbox  col-md-3 control-label">
+					<label><input type="checkbox" value="">Commercial Program</label>
+				</div>
+				</div> -->
+
+				<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-3 control-label" for="textinput">Default Issue Time</label>  
+  <div class="col-md-3">
+  	<input id="textinput" name="textinput" type="text" placeholder="" value="10:00" class="form-control input-md">
+  </div>
+
+ <label class="col-md-3 control-label" for="textinput">Default Start Time</label>  
+  <div class="col-md-3">
+  	<input id="textinput" name="textinput" type="text" placeholder="" value="12:00" class="form-control input-md">
+  </div>
+<!-- Multiple Radios (inline) -->
+
+
+</div>
+<div class="form-group">
+  <label class="col-md-3 control-label" for="textinput">Default Event Duration (min)</label>  
+  <div class="col-md-3">
+  	<input id="textinput" name="textinput" type="text" placeholder="" value="240" class="form-control input-md">
+  </div>
+  <label class="col-md-3 control-label" for="textinput">Default Tolerance Start Before(min)</label>  
+  <div class="col-md-3">
+  	<input id="textinput" name="textinput" type="text" placeholder="placeholder" value="0" class="form-control input-md">
+  </div>
+ </div>
+  <div class="form-group">
+  <label class="col-md-3 control-label" for="textinput">Default Tolerance Start Before(min)</label>  
+  <div class="col-md-3">
+  	<input id="textinput" name="textinput" type="text" placeholder="" value="0" class="form-control input-md">
+  </div>
+  <label class="col-md-3 control-label" for="textinput">Min Issue to start(min)</label>  
+  <div class="col-md-3">
+  	<input id="textinput" name="textinput" type="text" placeholder="placeholder" value="0" class="form-control input-md">
+  </div>
+ </div>
+  <!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-3 control-label" for="textarea">Description</label>
+  <div class="col-md-9">                     
+    <textarea class="form-control" id="textarea" name="textarea" placeholder="Enter description"></textarea>
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-3 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success">Ok</button>
+    <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+		<!-- </div> -->
+		
+	</div>
+</div>
+         
