@@ -1,10 +1,10 @@
 //script.js
 
-//create the module and name it scotchApp
+//create the module and name it adrApp
 //include ngRoute for routing needs
-var scotchApp = angular.module('scotchApp',['ngRoute','ui.bootstrap']);
+var adrApp = angular.module('adrApp',['ngRoute','ui.bootstrap']);
 
-scotchApp.config(function($routeProvider){
+adrApp.config(function($routeProvider){
 	$routeProvider
 	
 	.when('/home',{
@@ -51,38 +51,66 @@ scotchApp.config(function($routeProvider){
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('mainController',function($scope){
+adrApp.controller('mainController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Home page under construction!"
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('aboutController',function($scope){
+adrApp.controller('aboutController',function($scope){
 	//create a message to display in our view
 	
 	$scope.message = "About page under construction!"
 });
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('settingsController',function($scope){
+adrApp.controller('settingsController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Settings page under construction"
 		
 });
 
-scotchApp.controller('helpController',function($scope){
+adrApp.controller('helpController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Help page under construction"
 		
 });
 
 
-scotchApp.controller('createProgramsController',function($scope,$http){
+adrApp.controller('createProgramsController',function($scope,$http){
+
+$scope.programTypes = [
+	                   { label: 'Level', value: 'Level' },
+	                   { label: 'Delta', value: 'Delta' },
+	                   { label: 'Duty Cycle', value: 'DutyCycle' },
+	                   { label: 'Multiplier', value: 'Multiplier' },
+	                   { label: 'Price', value: 'Price' },
+	                   { label: 'Price Multiplier', value: 'PriceMultiplier' },
+	                   { label: 'Price Relative', value: 'PriceRelative' },
+	                   { label: 'Product', value: 'Product' }
+	                 ];
+
+$scope.venPushLevel = [
+	                   { label: 'Min Event', value: 'MinLevel' },
+	                   { label: 'Full Event', value: 'Full Event' },
+	                   { label: 'All', value: 'All' }
+	                 ];
+	 
+
+
+
+	$scope.ProgramType = $scope.programTypes[0];
+	$scope.VenPushLevel = $scope.venPushLevel[1];
 
 	
+	$scope.programs = { DefIssueTime :'10:00', DefStartTime:'12:00' ,DefEventDur:'240'
+	,DefTolStartTime:'0',DefTolStartAfterTime:'0',MinIssueStart:'0'	
+	};
+	 
 		$scope.submitMyForm=function(){
         /* while compiling form , angular created this object*/
         var data=$scope.programs;  
+     //   alert(data);
         /* post to server*/
         $http.post('responseservlet?addProgram=true', data).
         	success(function(data,status,headers,config){
@@ -92,7 +120,7 @@ scotchApp.controller('createProgramsController',function($scope,$http){
         	});        
     }	
 });
-scotchApp.controller('programsController',function($scope,$http){
+adrApp.controller('programsController',function($scope,$http){
 	$scope.programs = [];	
 	 $http.get('responseservlet?listPrograms=true').
 	    success(function(data, status, headers, config) {
@@ -106,13 +134,13 @@ scotchApp.controller('programsController',function($scope,$http){
 		
 });
 
-scotchApp.controller('clientsController',function($scope){
+adrApp.controller('clientsController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Clients page under construction"
 		
 });
 
-scotchApp.controller('eventsController',function($scope){
+adrApp.controller('eventsController',function($scope){
 	//create a message to display in our view
 	$scope.message = "Events page under construction"
 		
@@ -121,7 +149,7 @@ scotchApp.controller('eventsController',function($scope){
 
 
 //create the controller and inject Angular's $scope
-scotchApp.controller('sampleDataController',function($scope,$http){
+adrApp.controller('sampleDataController',function($scope,$http){
 	//create a message to display in our view
 	
 

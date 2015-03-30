@@ -91,15 +91,15 @@ public class ResponseServlet extends HttpServlet
         String data = buffer.toString();
         log.info("Post data "+data);
         Gson gson = new Gson();
-        ProgramBean bean = gson.fromJson(data, ProgramBean.class);
+        /*  ProgramBean bean = gson.fromJson(data, ProgramBean.class);
         Connection connection = DBUtil.getDatabaseConnection(dbQuery);
         if(null != connection){
         	boolean result = DBUtil.insertProgramBeanData(connection, bean);
         	log.info("DB Write status: "+result);
         	DBUtil.closeAll(connection, null, null);
-        }else{
+       }else{
         	log.severe("Connection is null");
-        }
+        } */
         		
     }
 

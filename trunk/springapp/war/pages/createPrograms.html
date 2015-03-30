@@ -1,157 +1,45 @@
-<!-- <div class="container">
-	<div class="row clearfix">
-		
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3">
-
-<form class="form-horizontal" ng-submit="submitMyForm()">
-
-	<div class="form-group">
-		<label for="program-name" class="col-sm-2 control-label">Program
-			Name</label>
-		<div class="col-xs-3">
-			<input type="text" class="form-control" id="program-name"
-				placeholder="Enter program name" ng-model="programs.programName">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="program-priority" class="col-sm-2 control-label">Short
-			Name</label>
-		<div class="col-xs-2">
-			<input type="text" class="form-control" id="program-priority"
-				placeholder="Enter short name" ng-model="programs.priority">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="program-priority" class="col-sm-2 control-label">Utility
-			Name</label>
-		<div class="col-xs-2">
-			<input type="text" class="form-control" id="program-priority"
-				placeholder="Enter program priority" ng-model="programs.priority">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="program-clients" class="col-sm-2 control-label">Program
-			Type</label>
-		<p>
-		<div class="btn-group col-xs-2" dropdown >
-			<button type="button" class="btn btn-danger">Level</button>
-			<button type="button" class="btn btn-danger dropdown-toggle"
-				dropdown-toggle>
-				<span class="caret"></span> <span class="sr-only">Split
-					button!</span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="#">Level</a></li>
-				<li><a href="#">Delta</a></li>
-				<li><a href="#">Duty Cycle</a></li>
-				<li><a href="#">Multiplier</a></li>
-				<li><a href="#">Price</a></li>
-				<li><a href="#">Price Multiplier</a></li>
-				<li><a href="#">Price Relative</a></li>
-				<li><a href="#">Product</a></li>
-
-				<li class="divider"></li>
-				<li><a href="#">Set Point</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="program-priority" class="col-sm-2 control-label">Priority</label>
-		<div class="col-xs-2">
-			<input type="text" class="form-control" id="program-priority"
-				placeholder="Enter program priority" ng-model="programs.priority">
-		</div>
-	</div>
-	
-	
-	<div class="form-group">
-		<label for="program-clients" class="col-sm-2 control-label">Program
-			Type</label>
-		<p>
-		<div class="btn-group col-xs-2" dropdown >
-			<button type="button" class="btn btn-danger">Level</button>
-			<button type="button" class="btn btn-danger dropdown-toggle"
-				dropdown-toggle>
-				<span class="caret"></span> <span class="sr-only">Split
-					button!</span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="#">Level</a></li>
-				<li><a href="#">Delta</a></li>
-				<li><a href="#">Duty Cycle</a></li>
-				<li><a href="#">Multiplier</a></li>
-				<li><a href="#">Price</a></li>
-				<li><a href="#">Price Multiplier</a></li>
-				<li><a href="#">Price Relative</a></li>
-				<li><a href="#">Product</a></li>
-
-				<li class="divider"></li>
-				<li><a href="#">Set Point</a></li>
-			</ul>
-		</div>
-	</div>
-	
-	
-	<div class="form-group">
-		<label for="program-priority" class="col-sm-2 control-label">Description</label>
-		<div class="col-xs-2">
-			<textarea class="form-control" rows="2"
-				placeholder="Enter program description "></textarea>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-primary">Create</button>
-		</div>
-	</div>
-
-</form>
-	</div>
-		
-	</div>
-</div> -->
-
-
 <div class="container">
 	<div class="row clearfix">
-		
-		<!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6  column col-sm-offset-0 col-md-offset-2 col-lg-offset-3"> -->
 
-<form class="form-horizontal">
-<fieldset>
 
-<!-- Form Name -->
+		<form class="form-horizontal" ng-submit="submitMyForm()">
+			<fieldset>
+
+				<!-- Form Name -->
 				<legend>Create Program</legend>
 				<!-- Select Basic -->
 				<div class="form-group">
 					<label class="col-md-3 control-label" for="selectbasic">Select
 						Program Type</label>
 					<div class="col-md-9">
-						<select id="selectbasic" name="selectbasic" class="form-control">
-							<option value="1">Level</option>
-							<option value="2">Delta</option>
-							<option value="3">Duty Cycle</option>
-							<option value="4">Multiplier</option>
-							<option value="2">Price</option>
-							<option value="3">Price Multiplier</option>
-							<option value="1">Price Relative</option>
-							<option value="2">Product</option>
+						<!-- <select class="form-control" ng-model="programs.ProgramName">
+							<option value="Level" selected="selected">Level</option>
+							<option value="Delta">Delta</option>
+							<option value="DutyCycle">Duty Cycle</option>
+							<option value="Multiplier">Multiplier</option>
+							<option value="Price">Price</option>
+							<option value="PriceMultiplier">Price Multiplier</option>
+							<option value="PriceRelative">Price Relative</option>
+							<option value="Product">Product</option>
 
-						</select>
+						</select> -->
+						<select class="form-control" ng-model="ProgramType" ng-options="opt as opt.label for opt in programTypes"></select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="textinput">Program
+					<label class="col-md-3 control-label" for="programName">Program
 						Name</label>
 					<div class="col-md-3">
-						<input id="textinput" name="textinput" type="text"
-							placeholder="Enter program name" class="form-control input-md">
+						<input id="programName"  type="text"
+							placeholder="Enter program name" class="form-control input-md"
+							ng-model="programs.programName">
 					</div>
 					<label class="col-md-3 control-label" for="textinput">Short
 						Name</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
-							placeholder="Enter short name" class="form-control input-md">
+							placeholder="Enter short name" class="form-control input-md"
+							ng-model="programs.shortName">
 					</div>
 				</div>
 				<div class="form-group">
@@ -159,104 +47,111 @@
 						Name</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
-							placeholder="Enter utility name" class="form-control input-md">
+							placeholder="Enter utility name" class="form-control input-md"
+							ng-model="programs.utilityName">
 					</div>
 
 					<label class="col-md-3 control-label" for="textinput">Priority</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
-							placeholder="Enter priority" class="form-control input-md">
+							placeholder="Enter priority" class="form-control input-md"
+							ng-model="programs.priority">
 					</div>
 
 				</div>
 
 				<div class="form-group">
-				 <label class="col-md-3 control-label" for="selectbasic">Select VEN Push Level</label>
-				  <div class="col-md-9">
-				    <select id="selectbasic" name="selectbasic" class="form-control">
-				      <option value="1">Min Event</option>
-				      <option value="2" selected>Full Event</option>
-				      <option value="3">All</option>
-				      
-				      
-				    </select>
-				  </div>
-				 </div>
+					<label class="col-md-3 control-label" for="selectbasic">Select
+						VEN Push Level</label>
+					<div class="col-md-9">
+					
+					<select class="form-control" ng-model="VenPushLevel" ng-options="opt as opt.label for opt in venPushLevel"></select>
+							</div>
+				</div>
 
-				
+
 				<div class="form-group">
-				<div class="col-md-3"></div>
-					<label class="checkbox-inline"><input type="checkbox" value="">Test Program</label>	
-					<label class="checkbox-inline"><input type="checkbox" value="">Emergency Dispatch</label>
-					<label class="checkbox-inline"><input type="checkbox" value="">Day Ahead Dispatch</label>
-					<label class="checkbox-inline"><input type="checkbox" value="">Commercial Program</label>
+					<div class="col-md-3"></div>
+					<label class="checkbox-inline"><input type="checkbox"
+						value="" ng-model="programs.TestProgram">Test Program</label> <label
+						class="checkbox-inline"><input type="checkbox" value=""
+						ng-model="programs.EmDispatch">Emergency Dispatch</label> <label
+						class="checkbox-inline"><input type="checkbox" value=""
+						ng-model="programs.DayAheadDispatch">Day Ahead Dispatch</label> <label
+						class="checkbox-inline"><input type="checkbox" value=""
+						ng-model="programs.CommProgram">Commercial Program</label>
 				</div>
-				<!-- <div class="form-group">
-				
-				<div class="checkbox  col-md-3 control-label">
-					<label><input type="checkbox" value="">Day Ahead Dispatch</label>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="DefIssueTime">Default
+						Issue Time</label>
+					<div class="col-md-3">
+					
+						<input id="DefIssueTime" name="DefIssueTime" type="text"
+							 class="form-control input-md"
+							ng-model="programs.DefIssueTime">
+					</div>
+
+					<label class="col-md-3 control-label" for="textinput">Default
+						Start Time</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text" placeholder=""
+							class="form-control input-md"
+							ng-model="programs.DefStartTime">
+					</div>
+
+
+
 				</div>
-				<div class="checkbox  col-md-3 control-label">
-					<label><input type="checkbox" value="">Commercial Program</label>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="textinput">Default
+						Event Duration (min)</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text" placeholder=""
+							 class="form-control input-md" ng-model="programs.DefEventDur">
+					</div>
+					<label class="col-md-3 control-label" for="textinput">Default
+						Tolerance Start Before(min)</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text"
+							placeholder="placeholder"  class="form-control input-md" ng-model="programs.DefTolStartTime">
+					</div>
 				</div>
-				</div> -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="textinput">Default
+						Tolerance Start After(min)</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text" placeholder=""
+							 class="form-control input-md" ng-model="programs.DefTolStartAfterTime">
+					</div>
+					<label class="col-md-3 control-label" for="textinput">Min
+						Issue to start(min)</label>
+					<div class="col-md-3">
+						<input id="textinput" name="textinput" type="text"
+							placeholder="placeholder" class="form-control input-md" ng-model="programs.MinIssueStart">
+					</div>
+				</div>
+				<!-- Textarea -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="textarea">Description</label>
+					<div class="col-md-9">
+						<textarea class="form-control" id="textarea" name="textarea"
+							placeholder="Enter description" ng-model="programs.Description"></textarea>
+					</div>
+				</div>
 
-				<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-3 control-label" for="textinput">Default Issue Time</label>  
-  <div class="col-md-3">
-  	<input id="textinput" name="textinput" type="text" placeholder="" value="10:00" class="form-control input-md">
-  </div>
+				<!-- Button (Double) -->
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="button1id"></label>
+					<div class="col-md-8">
+						<button id="button1id" name="button1id" class="btn btn-success">Ok</button>
+						<button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
+					</div>
+				</div>
 
- <label class="col-md-3 control-label" for="textinput">Default Start Time</label>  
-  <div class="col-md-3">
-  	<input id="textinput" name="textinput" type="text" placeholder="" value="12:00" class="form-control input-md">
-  </div>
-<!-- Multiple Radios (inline) -->
-
-
-</div>
-<div class="form-group">
-  <label class="col-md-3 control-label" for="textinput">Default Event Duration (min)</label>  
-  <div class="col-md-3">
-  	<input id="textinput" name="textinput" type="text" placeholder="" value="240" class="form-control input-md">
-  </div>
-  <label class="col-md-3 control-label" for="textinput">Default Tolerance Start Before(min)</label>  
-  <div class="col-md-3">
-  	<input id="textinput" name="textinput" type="text" placeholder="placeholder" value="0" class="form-control input-md">
-  </div>
- </div>
-  <div class="form-group">
-  <label class="col-md-3 control-label" for="textinput">Default Tolerance Start Before(min)</label>  
-  <div class="col-md-3">
-  	<input id="textinput" name="textinput" type="text" placeholder="" value="0" class="form-control input-md">
-  </div>
-  <label class="col-md-3 control-label" for="textinput">Min Issue to start(min)</label>  
-  <div class="col-md-3">
-  	<input id="textinput" name="textinput" type="text" placeholder="placeholder" value="0" class="form-control input-md">
-  </div>
- </div>
-  <!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-3 control-label" for="textarea">Description</label>
-  <div class="col-md-9">                     
-    <textarea class="form-control" id="textarea" name="textarea" placeholder="Enter description"></textarea>
-  </div>
-</div>
-
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-3 control-label" for="button1id"></label>
-  <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-success">Ok</button>
-    <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
+			</fieldset>
+		</form>
 		<!-- </div> -->
-		
+
 	</div>
 </div>
-         
