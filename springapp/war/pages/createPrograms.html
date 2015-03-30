@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row clearfix">
 
 
@@ -9,32 +9,21 @@
 				<legend>Create Program</legend>
 				<!-- Select Basic -->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="selectbasic">Select
+					<label class="col-md-2 control-label" for="selectbasic">Select
 						Program Type</label>
-					<div class="col-md-9">
-						<!-- <select class="form-control" ng-model="programs.ProgramName">
-							<option value="Level" selected="selected">Level</option>
-							<option value="Delta">Delta</option>
-							<option value="DutyCycle">Duty Cycle</option>
-							<option value="Multiplier">Multiplier</option>
-							<option value="Price">Price</option>
-							<option value="PriceMultiplier">Price Multiplier</option>
-							<option value="PriceRelative">Price Relative</option>
-							<option value="Product">Product</option>
-
-						</select> -->
-						<select class="form-control" ng-model="ProgramType" ng-options="opt as opt.label for opt in programTypes"></select>
+					<div class="col-md-3">
+							<select class="form-control" ng-model="ProgramType" ng-options="opt as opt.label for opt in programTypes"></select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="programName">Program
+					<label class="col-md-2 control-label" for="programName">Program
 						Name</label>
 					<div class="col-md-3">
 						<input id="programName"  type="text"
 							placeholder="Enter program name" class="form-control input-md"
 							ng-model="programs.programName">
 					</div>
-					<label class="col-md-3 control-label" for="textinput">Short
+					<label class="col-md-2 control-label" for="textinput">Short
 						Name</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
@@ -43,7 +32,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="textinput">Utility
+					<label class="col-md-2 control-label" for="textinput">Utility
 						Name</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
@@ -51,7 +40,7 @@
 							ng-model="programs.utilityName">
 					</div>
 
-					<label class="col-md-3 control-label" for="textinput">Priority</label>
+					<label class="col-md-2 control-label" for="textinput">Priority</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
 							placeholder="Enter priority" class="form-control input-md"
@@ -61,9 +50,9 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="selectbasic">Select
+					<label class="col-md-2 control-label" for="selectbasic">Select
 						VEN Push Level</label>
-					<div class="col-md-9">
+					<div class="col-md-3">
 					
 					<select class="form-control" ng-model="VenPushLevel" ng-options="opt as opt.label for opt in venPushLevel"></select>
 							</div>
@@ -71,7 +60,7 @@
 
 
 				<div class="form-group">
-					<div class="col-md-3"></div>
+					<div class="col-md-2"></div>
 					<label class="checkbox-inline"><input type="checkbox"
 						value="" ng-model="programs.TestProgram">Test Program</label> <label
 						class="checkbox-inline"><input type="checkbox" value=""
@@ -83,7 +72,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="DefIssueTime">Default
+					<label class="col-md-2 control-label" for="DefIssueTime">Default
 						Issue Time</label>
 					<div class="col-md-3">
 					
@@ -92,7 +81,7 @@
 							ng-model="programs.DefIssueTime">
 					</div>
 
-					<label class="col-md-3 control-label" for="textinput">Default
+					<label class="col-md-2 control-label" for="textinput">Default
 						Start Time</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text" placeholder=""
@@ -104,13 +93,13 @@
 
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="textinput">Default
+					<label class="col-md-2 control-label" for="textinput">Default
 						Event Duration (min)</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text" placeholder=""
 							 class="form-control input-md" ng-model="programs.DefEventDur">
 					</div>
-					<label class="col-md-3 control-label" for="textinput">Default
+					<label class="col-md-2 control-label" for="textinput">Default
 						Tolerance Start Before(min)</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
@@ -118,13 +107,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="textinput">Default
+					<label class="col-md-2 control-label" for="textinput">Default
 						Tolerance Start After(min)</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text" placeholder=""
 							 class="form-control input-md" ng-model="programs.DefTolStartAfterTime">
 					</div>
-					<label class="col-md-3 control-label" for="textinput">Min
+					<label class="col-md-2 control-label" for="textinput">Min
 						Issue to start(min)</label>
 					<div class="col-md-3">
 						<input id="textinput" name="textinput" type="text"
@@ -133,8 +122,8 @@
 				</div>
 				<!-- Textarea -->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="textarea">Description</label>
-					<div class="col-md-9">
+					<label class="col-md-2 control-label" for="textarea">Description</label>
+					<div class="col-md-3">
 						<textarea class="form-control" id="textarea" name="textarea"
 							placeholder="Enter description" ng-model="programs.Description"></textarea>
 					</div>
@@ -142,7 +131,7 @@
 
 				<!-- Button (Double) -->
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="button1id"></label>
+					<label class="col-md-2 control-label" for="button1id"></label>
 					<div class="col-md-8">
 						<button id="button1id" name="button1id" class="btn btn-success">Ok</button>
 						<button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
