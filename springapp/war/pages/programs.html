@@ -1,25 +1,56 @@
-<a class="btn btn-primary" href="#addProgram" role="button"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+<a class="btn btn-primary" href="#addProgram" role="button"> <span
+	class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+<div class="ng-hide" ng-show="showMessage">
+	<label class="control-label"></label>
+	
+		<span class="label label-success">{{msg}}</span>
+	
+</div>
+
+<div class="ng-hide" ng-show="showErrMessage">
+	<label class="col-md-2 control-label"></label>
+	<h3>
+		<span class="label label-danger col-md-3">{{errMsg}}</span>
+	</h3>
+</div>
 <p>
 <table class="table table-bordered">
 
- <thead>
-        <tr>
-          <th>Short Name</th>
-          <th>Description</th>
-          <th>Program Type</th>       
-          <th>Shed(kW/kVA)</th>
-          <th>Action
-        </tr>
-      </thead>
-      <tbody>      
-	     <tr ng-repeat="program in programs">
-	        <td>{{program.ShortName}}</td>
-	        <td>{{program.Description}}</td>
-	        <td>{{program.ProgramType}}</td>	        
-	        <td>32KW/h</td>
-	        <td><a href="" ng-click="edit(program.ProgramId)">Edit</a></td>
-	    </tr>
-      </tbody>
-    </table>
-    <p>
-  
+	<thead>
+		<tr>
+			<th>Short Name</th>
+			<th>Description</th>
+			<th>Program Type</th>
+			<th>Shed(kW/kVA)</th>
+			<th>Action
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="program in programs">
+			<td>{{program.ShortName}}</td>
+			<td>{{program.Description}}</td>
+			<td>{{program.ProgramType}}</td>
+			<td>32KW/h</td>
+			<td><a class="btn btn-primary" href="" role="button"
+				ng-click="edit(program.ProgramId)"> <span
+					class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> <a
+				class="btn btn-primary" href="" role="button"
+				ng-click="remove(program.ProgramId)"> <span
+					class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> <!-- <a href="" ng-click="edit(program.ProgramId)">Edit</a> --></td>
+		</tr>
+	</tbody>
+</table>
+<p>
+
+	<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <a class="btn btn-primary" href=""> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
+        </div>
+        <div class="modal-body">
+           <h3><span class="label label-warning">Are you sure?</span></h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Yes</button>
+            <button class="btn btn-warning" ng-click="cancel()">No</button>
+        </div>
+</script>

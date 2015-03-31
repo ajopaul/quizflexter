@@ -21,6 +21,7 @@ public class DBUtilTest extends TestCase{
 	@Override
 	protected void setUp() throws Exception {
 		connection = DBUtil.getDatabaseConnection(dbQuery);
+		 DBUtil.createTables(connection,"programs");
 		super.setUp();
 	}
 	
@@ -120,5 +121,31 @@ public class DBUtilTest extends TestCase{
 		ProgramBean bean = ProgramBeanUtils.getProgramBean();
 		JSONObject obj = new JSONObject(bean);
 		System.out.println("Obj "+obj);
+	}
+	
+	
+	public void testDeleteProgramFromDB(){
+	   try {
+	      connection.setAutoCommit(false);
+	    } catch (SQLException e1) {
+	      // TODO Auto-generated catch block
+	      e1.printStackTrace();
+	    }
+	   
+	    assertTrue(DBUtil.checkIfTableExists(connection));
+	    
+	    
+	    ProgramBean programBean = getSampleProgramBean();
+	    boolean result = DBUtil.insertProgramBeanData(connection, programBean);
+	    assertTrue(result);
+	    
+	    result = DBUtil.deleteProgramFromDB(connection, "delete from programs where ProgramId=1");
+	    assertTrue(result);
+	    try {
+	      connection.rollback();
+	    } catch (SQLException e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    }
 	}
 }

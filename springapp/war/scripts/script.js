@@ -101,6 +101,11 @@ adrApp.service('programService', function() {
 	});
 
 
+
+/**
+ *	***** EDIT A PROGRAM ****  
+ */
+
 adrApp.controller('editProgramsController',function($scope,$http,$timeout,$location,programService){
 
 	/*
@@ -169,7 +174,7 @@ $scope.venPushLevel = [
 				 * On sucess show a succes message and disappear
 				 */
         	    var messageTimer = false,
-        	        displayDuration = 3000; // milliseconds 
+        	        displayDuration = 1000; // milliseconds 
         	    
         	    $scope.showMessage = false;
         	    $scope.msg = "Sucessfully created program!";
@@ -192,7 +197,7 @@ $scope.venPushLevel = [
 				 * On failure show a error message
 				 */
         	    var messageTimer = false,
-        	        displayDuration = 3000; // milliseconds 
+        	        displayDuration = 1000; // milliseconds 
         	    
         	    $scope.showErrMessage = false;
         	    $scope.errMsg = "Error while creating program.";
@@ -215,6 +220,9 @@ $scope.venPushLevel = [
 		
 });
 
+/**
+ * ***** ADD A PROGRAM ***** 
+ */
 adrApp.controller('createProgramsController',function($scope,$http,$timeout,$location){
 	
 	/*
@@ -273,7 +281,7 @@ $scope.venPushLevel = [
 				 * On sucess show a succes message and disappear
 				 */
         	    var messageTimer = false,
-        	        displayDuration = 3000; // milliseconds 
+        	        displayDuration = 1000; // milliseconds 
         	    
         	    $scope.showMessage = false;
         	    $scope.msg = "Sucessfully created program!";
@@ -296,7 +304,7 @@ $scope.venPushLevel = [
 				 * On failure show a error message
 				 */
         	    var messageTimer = false,
-        	        displayDuration = 3000; // milliseconds 
+        	        displayDuration = 1000; // milliseconds 
         	    
         	    $scope.showErrMessage = false;
         	    $scope.errMsg = "Error while creating program.";
@@ -320,7 +328,11 @@ $scope.venPushLevel = [
 		
 });
 
-adrApp.controller('programsController',function($scope,$location,$http,programService){
+/**
+ * *** LIST PROGRAMS ***
+ */
+
+adrApp.controller('programsController',function($scope,$location,$route,$timeout,$http,$modal,programService){
 	$scope.programs = [];	
 	 $http.get('responseservlet?listPrograms=true').
 	    success(function(data, status, headers, config) {
@@ -341,10 +353,93 @@ adrApp.controller('programsController',function($scope,$location,$http,programSe
 		  programService.setProgramId(programId);
 		  $location.path( '/editProgram' );
 		};
-		
+	
+	$scope.remove = function (programId) {
+			// alert(programId);
+			  programService.setProgramId(programId);
+			  
+			  var modalInstance = $modal.open({
+			      templateUrl: 'myModalContent.html',
+			      controller: 'ModalInstanceCtrl',
+			      size:'sm'
+			    });
+
+			    modalInstance.result.then(function (selectedItem) {
+			    	/*
+					 * On sucess show a succes message and disappear
+					 */
+	        	    var messageTimer = false,
+	        	        displayDuration = 1500; // milliseconds 
+	        	    
+	        	    $scope.showMessage = false;
+	        	    $scope.msg = "Sucessfully deleted program!";
+	        	    if (messageTimer) {
+	        	            $timeout.cancel(messageTimer);
+	        	    }
+	        	        
+	        	        $scope.showMessage = true;
+	        	    
+	        	        //When timeout expires redirect to programs page.
+	        	        messageTimer = $timeout(function () {
+	        	            $scope.showMessage = false;
+	        	            $route.reload();
+	        	        }, displayDuration);
+			    }, function () {
+			     
+			    	// $log.info('Modal dismissed at: ' + new Date());
+			    });
+			  
+			 // $location.path( '/editProgram' );
+			};	
 });
 
+//Please note that $modalInstance represents a modal window (instance) dependency.
+//It is not the same as the $modal service used above.
 
+	adrApp.controller('ModalInstanceCtrl', function ($scope, $http,$location, $timeout,$modalInstance,programService ) {
+
+	$scope.ok = function () {
+		$modalInstance.close();
+		 $http.post('responseservlet?deleteProgram=true&programId='+programService.getProgramId()).
+		    success(function(data, status, headers, config) {
+
+				
+        	    
+        		
+        	
+		    	
+		    }).
+		    error(function(data, status, headers, config) {
+
+				/*
+				 * On failure show a error message
+				 */
+        	    var messageTimer = false,
+        	        displayDuration = 3000; // milliseconds 
+        	    
+        	    $scope.showErrMessage = false;
+        	    $scope.errMsg = "Error while deleting program.";
+        	    if (messageTimer) {
+        	            $timeout.cancel(messageTimer);
+        	    }
+        	        
+        	        $scope.showErrMessage = true;
+        	    
+        	        //When timeout expires redirect to programs page.
+        	        messageTimer = $timeout(function () {
+        	            $scope.showErrMessage = false;
+        	            //$location.path('/programs');
+        	        }, displayDuration);
+        	    
+        		
+        	
+        	});
+	};
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+});
 
 adrApp.controller('clientsController',function($scope){
 	//create a message to display in our view
