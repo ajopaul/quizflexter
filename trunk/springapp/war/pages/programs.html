@@ -6,22 +6,18 @@
         <tr>
           <th>Short Name</th>
           <th>Description</th>
-          <th>Program Type</th>
-          <th>Customers</th>
-          <th>Resources</th>
+          <th>Program Type</th>       
           <th>Shed(kW/kVA)</th>
           <th>Action
         </tr>
       </thead>
       <tbody>      
 	     <tr ng-repeat="program in programs">
-	        <td>{{program.shortName}}</td>
-	        <td>{{program.description}}</td>
-	        <td>{{program.type}}</td>
-	        <td>{{program.customers}}</td>
-	        <td>{{program.resources}}</td>
-	        <td>{{program.shed}}</td>
-	        <td>{{link}}</td>
+	        <td>{{program.ShortName}}</td>
+	        <td>{{program.Description}}</td>
+	        <td>{{program.ProgramType}}</td>	        
+	        <td>32KW/h</td>
+	        <td><a href="" ng-click="edit(program.ProgramId)">Edit</a></td>
 	    </tr>
       </tbody>
     </table>
