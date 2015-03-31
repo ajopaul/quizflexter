@@ -1,17 +1,17 @@
-<a class="btn btn-primary" href="#addProgram" role="button"> <span
-	class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-<div class="ng-hide" ng-show="showMessage">
-	<label class="control-label"></label>
-	
+<div class="row">
+	<div class="col-md-0"><a class="btn btn-primary" href="#addProgram" role="button"> <span
+		class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+	</div>
+	<div class="ng-hide col-md-1" ng-show="showMessage">
 		<span class="label label-success">{{msg}}</span>
-	
-</div>
+	</div>
 
-<div class="ng-hide" ng-show="showErrMessage">
-	<label class="col-md-2 control-label"></label>
-	<h3>
-		<span class="label label-danger col-md-3">{{errMsg}}</span>
-	</h3>
+	<div class="ng-hide" ng-show="showErrMessage">
+		<label class="col-md-2 control-label"></label>
+		<h3>
+			<span class="label label-danger col-md-3">{{errMsg}}</span>
+		</h3>
+	</div>
 </div>
 <p>
 <table class="table table-bordered">
@@ -47,7 +47,7 @@
             <a class="btn btn-primary" href=""> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
         </div>
         <div class="modal-body">
-           <h3><span class="label label-warning">Are you sure?</span></h3>
+           <h3><span class="labell-default">Are you sure?</span></h3>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">Yes</button>

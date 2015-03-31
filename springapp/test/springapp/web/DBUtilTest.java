@@ -148,4 +148,32 @@ public class DBUtilTest extends TestCase{
 	      e.printStackTrace();
 	    }
 	}
+	
+	public void testDoUpdateProgram(){
+		 try {
+		      connection.setAutoCommit(false);
+		    } catch (SQLException e1) {
+		      // TODO Auto-generated catch block
+		      e1.printStackTrace();
+		    }
+		   
+		    assertTrue(DBUtil.checkIfTableExists(connection));
+		    
+		    ProgramBean programBean = getSampleProgramBean();
+		    boolean result = DBUtil.insertProgramBeanData(connection, programBean);
+		    assertTrue(result);
+		    
+		    result = DBUtil.doUpdateProgram(connection, "update programs set ProgramName = 'TestOnlyName' where ProgramId=1");
+		    assertTrue(result);
+		    
+		    ResultSet rs = (ResultSet)DBUtil.getResultSetData(connection, "select ProgramName from programs where ProgramId=1"); 
+		    try {
+		    assertTrue(rs.next());
+		    assertEquals("TestOnlyName",rs.getString("ProgramName"));
+		      connection.rollback();
+		    } catch (SQLException e) {
+		      // TODO Auto-generated catch block
+		      e.printStackTrace();
+		    }
+	}
 }

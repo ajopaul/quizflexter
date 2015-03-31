@@ -175,18 +175,38 @@ public class DBUtil {
    * @return
    */
   public static boolean deleteProgramFromDB(Connection connection,String query){
-    boolean isDeleteSuccess = false;
     
-    try{
+    return doGenericProgramTableUpdate(connection, query);
+    
+  }
+/**
+ * Perform a generic update on programs table based on query passed.
+ * @param connection
+ * @param query
+ * @return
+ */
+private static boolean doGenericProgramTableUpdate(Connection connection,
+		String query ) {
+	boolean isSuccess = false;
+	try{
         Statement stmt = connection.createStatement();
         int returnRes = stmt.executeUpdate(query);
-        isDeleteSuccess = (returnRes > 0)?true:false;
+        isSuccess = (returnRes > 0)?true:false;
       } catch (SQLException e) {
         e.printStackTrace();
       }
-    
-    return isDeleteSuccess;
-  }
+	return isSuccess;
+}
+  
+/**  
+ * Update a row in programs table based on the programId
+ * @param connection
+ * @param string
+ * @return
+ */
+	public static boolean doUpdateProgram(Connection connection, String dbQuery) {
+		   return doGenericProgramTableUpdate(connection, dbQuery);
+	}
   
 	/**
 	 * insret a program bean to db.
@@ -248,5 +268,6 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
+
 	
 }

@@ -125,39 +125,6 @@ adrApp.controller('editProgramsController',function($scope,$http,$timeout,$locat
 		      // log error
 		    });
 		
-		/*
-		 *Select drop down values for program types 
-		 */
-$scope.programTypes = [
-	                   { label: 'Level', value: 'Level' },
-	                   { label: 'Delta', value: 'Delta' },
-	                   { label: 'Duty Cycle', value: 'DutyCycle' },
-	                   { label: 'Multiplier', value: 'Multiplier' },
-	                   { label: 'Price', value: 'Price' },
-	                   { label: 'Price Multiplier', value: 'PriceMultiplier' },
-	                   { label: 'Price Relative', value: 'PriceRelative' },
-	                   { label: 'Product', value: 'Product' }
-	                 ];
-/*
- *Select drop down values for Ven Push Level 
- */
-$scope.venPushLevel = [
-	                   { label: 'Min Event', value: 'MinLevel' },
-	                   { label: 'Full Event', value: 'Full Event' },
-	                   { label: 'All', value: 'All' }
-	                 ];
-	 
-
-
-//Set default values of the select drop downs.
-	$scope.ProgramType = $scope.programTypes[0];
-	$scope.VenPushLevel = $scope.venPushLevel[1];
-
-	//Set default values
-	$scope.programs = { DefIssueTime :'10:00', DefStartTime:'12:00' ,DefEventDur:'240'
-	,DefTolStartTime:'0',DefTolStartAfterTime:'0',MinIssueStart:'0'	
-	};
-	 
 	/*
 	 * Called when submit is pressed i.e. ok button
 	 */
@@ -168,7 +135,7 @@ $scope.venPushLevel = [
         data.VenPushLevel=$scope.VenPushLevel.value;
         
         /* post to server*/
-        $http.post('responseservlet?addProgram=true', data).
+        $http.post('responseservlet?editUpdateProgram=true', data).
         	success(function(data,status,headers,config){
 				/*
 				 * On sucess show a succes message and disappear
@@ -177,7 +144,7 @@ $scope.venPushLevel = [
         	        displayDuration = 1000; // milliseconds 
         	    
         	    $scope.showMessage = false;
-        	    $scope.msg = "Sucessfully created program!";
+        	    $scope.msg = "Sucessfully updated program!";
         	    if (messageTimer) {
         	            $timeout.cancel(messageTimer);
         	    }
@@ -336,6 +303,7 @@ adrApp.controller('programsController',function($scope,$location,$route,$timeout
 	$scope.programs = [];	
 	 $http.get('responseservlet?listPrograms=true').
 	    success(function(data, status, headers, config) {
+	    	
 	    	$scope.programs = data;	
 	    	//console.log(data.length);
 	    
@@ -364,26 +332,53 @@ adrApp.controller('programsController',function($scope,$location,$route,$timeout
 			      size:'sm'
 			    });
 
-			    modalInstance.result.then(function (selectedItem) {
-			    	/*
-					 * On sucess show a succes message and disappear
-					 */
-	        	    var messageTimer = false,
-	        	        displayDuration = 1500; // milliseconds 
-	        	    
-	        	    $scope.showMessage = false;
-	        	    $scope.msg = "Sucessfully deleted program!";
-	        	    if (messageTimer) {
-	        	            $timeout.cancel(messageTimer);
-	        	    }
-	        	        
-	        	        $scope.showMessage = true;
-	        	    
-	        	        //When timeout expires redirect to programs page.
-	        	        messageTimer = $timeout(function () {
-	        	            $scope.showMessage = false;
-	        	            $route.reload();
-	        	        }, displayDuration);
+			    modalInstance.result.then(function () {
+			    	 $http.post('responseservlet?deleteProgram=true&programId='+programService.getProgramId()).
+					    success(function(data, status, headers, config) {
+					    	/*
+							 * On sucess show a succes message and disappear
+							 */
+			        	    var messageTimer = false,
+			        	        displayDuration = 1000; // milliseconds 
+			        	    
+			        	    $scope.showMessage = false;
+			        	    $scope.msg = "Sucessfully deleted program!";
+			        	    if (messageTimer) {
+			        	            $timeout.cancel(messageTimer);
+			        	    }
+			        	        
+			        	        $scope.showMessage = true;
+			        	    
+			        	        //When timeout expires redirect to programs page.
+			        	        messageTimer = $timeout(function () {
+			        	            $scope.showMessage = false;
+			        	            $route.reload();
+			        	        }, displayDuration);
+					    	
+					    }).
+					    error(function(data, status, headers, config) {
+
+							/*
+							 * On failure show a error message
+							 */
+			        	    var messageTimer = false,
+			        	        displayDuration = 3000; // milliseconds 
+			        	    
+			        	    $scope.showErrMessage = false;
+			        	    $scope.errMsg = "Error while deleting program.";
+			        	    if (messageTimer) {
+			        	            $timeout.cancel(messageTimer);
+			        	    }
+			        	        
+			        	        $scope.showErrMessage = true;
+			        	    
+			        	        //When timeout expires redirect to programs page.
+			        	        messageTimer = $timeout(function () {
+			        	            $scope.showErrMessage = false;
+			        	            //$location.path('/programs');
+			        	        }, displayDuration);
+			        	
+			        	});	
 			    }, function () {
 			     
 			    	// $log.info('Modal dismissed at: ' + new Date());
@@ -400,40 +395,6 @@ adrApp.controller('programsController',function($scope,$location,$route,$timeout
 
 	$scope.ok = function () {
 		$modalInstance.close();
-		 $http.post('responseservlet?deleteProgram=true&programId='+programService.getProgramId()).
-		    success(function(data, status, headers, config) {
-
-				
-        	    
-        		
-        	
-		    	
-		    }).
-		    error(function(data, status, headers, config) {
-
-				/*
-				 * On failure show a error message
-				 */
-        	    var messageTimer = false,
-        	        displayDuration = 3000; // milliseconds 
-        	    
-        	    $scope.showErrMessage = false;
-        	    $scope.errMsg = "Error while deleting program.";
-        	    if (messageTimer) {
-        	            $timeout.cancel(messageTimer);
-        	    }
-        	        
-        	        $scope.showErrMessage = true;
-        	    
-        	        //When timeout expires redirect to programs page.
-        	        messageTimer = $timeout(function () {
-        	            $scope.showErrMessage = false;
-        	            //$location.path('/programs');
-        	        }, displayDuration);
-        	    
-        		
-        	
-        	});
 	};
 
 	$scope.cancel = function () {
@@ -455,23 +416,4 @@ adrApp.controller('eventsController',function($scope){
 
 
 
-//create the controller and inject Angular's $scope
-adrApp.controller('sampleDataController',function($scope,$http){
-	//create a message to display in our view
-	
-
-	 $http.get('responseservlet').
-	    success(function(data, status, headers, config) {
-	      //$scope.posts = data;
-	      $scope.region = data.Region;
-	      $scope.category = data.Category;
-	      $scope.message = data.message;
-	    }).
-	    error(function(data, status, headers, config) {
-	      // log error
-	    });
-	
-	
-	//$scope.message = "Everyone come and see how good I look contact me page!'"
-});
 
