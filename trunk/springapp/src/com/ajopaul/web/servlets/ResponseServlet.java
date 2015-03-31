@@ -22,7 +22,7 @@ public class ResponseServlet extends HttpServlet
 { 
 	Logger log = Logger.getLogger(getClass().getSimpleName());
 	
-	String dbQuery = "jdbc:sqlite:adrdb.db";
+	String dbQuery = "jdbc:sqlite:/dbfiles/adrdb.db";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
                                                                            IOException
@@ -96,7 +96,12 @@ public class ResponseServlet extends HttpServlet
     DBUtil.closeAll(connection,null,null);
       
     }
-    
+   /**
+    * Update a value in programs table based on program id 
+    * @param req
+    * @param resp
+    * @throws IOException
+    */
     public void doEditUpdateProgram(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
 
@@ -104,13 +109,13 @@ public class ResponseServlet extends HttpServlet
       Connection connection = DBUtil.getDatabaseConnection(dbQuery);
       if(null != connection){
         Integer programId = Integer.parseInt(req.getParameter("programId"));
-        ProgramBean brean = DBUtil.getProgramBeanFromDB(connection, "Select * from programs where ProgramId="+programId.intValue());
+        boolean result = DBUtil.doUpdateProgram(connection, "Select * from programs where ProgramId="+programId.intValue());
         
-        Gson gson = new Gson();
+       /* Gson gson = new Gson();
         String data = gson.toJson(brean);
         log.info("JSon data\n"+data);
         PrintWriter out = resp.getWriter();
-        out.print(data);
+        out.print(data);*/
       }else{
         log.info("Connection is null");
       }

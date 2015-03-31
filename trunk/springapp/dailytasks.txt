@@ -1,0 +1,5 @@
+1. Complete Edit
+2. Fine tune delete
+3. Clone button
+4. Validation required
+5. Spring
