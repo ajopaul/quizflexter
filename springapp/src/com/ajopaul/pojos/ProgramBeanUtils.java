@@ -9,7 +9,7 @@ public class ProgramBeanUtils {
 	 * @param clients
 	 * @return
 	 */
-	public static ProgramBean getProgramBean(String programBean,int priorty,String clients){
-		return new ProgramBean(programBean,priorty,clients);
+	public static ProgramBean getProgramBean(){
+		return new ProgramBean();
 	}
 }

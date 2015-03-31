@@ -37,12 +37,12 @@ public class HelloController implements Controller {
           model.put("secondname", "Schmitt");
 
     	
-    	List<Object> list = new ArrayList<Object>();
+  /*  	List<Object> list = new ArrayList<Object>();
         list.add(ProgramBeanUtils.getProgramBean("Prog One",100 , "One Client"));
         list.add(ProgramBeanUtils.getProgramBean("Prog Two",200 , "Two Client"));
         list.add(ProgramBeanUtils.getProgramBean("Prog Three",300 , "Three Client"));
         //Create a JSONArray
-        JSONArray arry = new JSONArray(list);
+        JSONArray arry = new JSONArray(list);*/
          return new ModelAndView("jsonView", model);
         //return new ModelAndView("jsonView", arry);
     }

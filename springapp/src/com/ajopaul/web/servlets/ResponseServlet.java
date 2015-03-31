@@ -22,7 +22,7 @@ public class ResponseServlet extends HttpServlet
 { 
 	Logger log = Logger.getLogger(getClass().getSimpleName());
 	
-	String dbQuery = "jdbc:sqlite:springdb.db";
+	String dbQuery = "jdbc:sqlite:adrdb.db";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
                                                                            IOException
@@ -30,7 +30,9 @@ public class ResponseServlet extends HttpServlet
       if(null != req.getParameter("listPrograms")){
         doListPrograms(req,resp);
       }else if(null != req.getParameter("addProgram")){
-    	doAddProgram(req, resp);
+        doAddProgram(req, resp);
+      }else if(null != req.getParameter("editProgram")){
+        dpEditProgra(req,resp);
       }else{
     	  try{
     	  doAddProgram(req, resp);
@@ -40,6 +42,28 @@ public class ResponseServlet extends HttpServlet
       }
     }
     
+    public void dpEditProgra(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+
+      log.info("Requested for data ");
+      Connection connection = DBUtil.getDatabaseConnection(dbQuery);
+      if(null != connection){
+        Integer programId = Integer.parseInt(req.getParameter("programId"));
+        ProgramBean brean = DBUtil.getProgramBeanFromDB(connection, "Select * from programs where ProgramId="+programId.intValue());
+        
+        Gson gson = new Gson();
+        String data = gson.toJson(brean);
+        log.info("JSon data\n"+data);
+        PrintWriter out = resp.getWriter();
+        out.print(data);
+      }else{
+        log.info("Connection is null");
+      }
+ 
+    DBUtil.closeAll(connection,null,null);
+      
+    }
+
     /**
      * Perform do Listing of the programs
      * @param req
@@ -50,20 +74,24 @@ public class ResponseServlet extends HttpServlet
     protected void doListPrograms(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
      //Create a list of ProgramBeans
-     /* List<Object> list = new ArrayList<Object>();
-      list.add(ProgramBeanUtils.getProgramBean("Prog One",100 , "One Client"));
-      list.add(ProgramBeanUtils.getProgramBean("Prog Two",200 , "Two Client"));
-      list.add(ProgramBeanUtils.getProgramBean("Prog Three",300 , "Three Client"));*/
+    
     	  log.info("Requested for data ");
     	  Connection connection = DBUtil.getDatabaseConnection(dbQuery);
     	  if(null != connection){
-    		  List<Object> list = DBUtil.getProgramBeansFromDB(connection, "Select * from programs");
+/*    		  List<Object> list = DBUtil.getProgramBeansFromDB(connection, "Select * from programs");
     		  //Create a JSONArray
     		  JSONArray arry = new JSONArray(list);
 
     		  PrintWriter out = resp.getWriter();
-    		  out.print(arry.toString());
-    		  log.info("JSon data\n"+arry.toString());
+    		  out.print(arry.toString());*/
+    		  //log.info("JSon data\n"+arry.toString());
+    	    List<ProgramBean> list = DBUtil.getProgramBeansFromDB(connection, "Select * from programs");
+    	    
+    	    Gson gson = new Gson();
+    	    String data = gson.toJson(list);
+    	    log.info("JSon data\n"+data);
+    	    PrintWriter out = resp.getWriter();
+          out.print(data);
     	  }else{
     		  log.info("Connection is null");
     	  }
@@ -91,7 +119,7 @@ public class ResponseServlet extends HttpServlet
         String data = buffer.toString();
         log.info("Post data "+data);
         Gson gson = new Gson();
-        /*  ProgramBean bean = gson.fromJson(data, ProgramBean.class);
+        ProgramBean bean = gson.fromJson(data, ProgramBean.class);
         Connection connection = DBUtil.getDatabaseConnection(dbQuery);
         if(null != connection){
         	boolean result = DBUtil.insertProgramBeanData(connection, bean);
@@ -99,7 +127,7 @@ public class ResponseServlet extends HttpServlet
         	DBUtil.closeAll(connection, null, null);
        }else{
         	log.severe("Connection is null");
-        } */
+        } 
         		
     }
 

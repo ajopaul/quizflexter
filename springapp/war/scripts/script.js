@@ -42,6 +42,11 @@ adrApp.config(function($routeProvider){
 		controller : 'eventsController'
 	})
 	
+	.when('/editProgram',{
+		templateUrl : 'pages/createPrograms.html',
+		controller : 'editProgramsController'
+	})
+	
 	.when('/addProgram',{
 		templateUrl : 'pages/createPrograms.html',
 		controller : 'createProgramsController'
@@ -77,8 +82,47 @@ adrApp.controller('helpController',function($scope){
 });
 
 
-adrApp.controller('createProgramsController',function($scope,$http){
+adrApp.service('programService', function() {
+	  this.userData = {ProgramId:0};
 
+	  this.user = function() {
+	        return this.userData;
+	  };
+
+	  this.setProgramId = function(ProgramId){
+		  this.userData.ProgramId = ProgramId;
+	  };
+	  
+	  this.getProgramId = function(){
+		  return this.userData.ProgramId;
+	  };
+	  
+	 
+	});
+
+
+adrApp.controller('editProgramsController',function($scope,$http,$timeout,$location,programService){
+
+	/*
+	 * When user clicks on cancel button
+	 */
+	$scope.cancel = function () {
+		  $location.path( '/programs' );
+		};
+
+		//alert(programService.getProgramId);
+		$scope.programs = [];	
+		 $http.get('responseservlet?editProgram=true&programId='+programService.getProgramId()).
+		    success(function(data, status, headers, config) {
+		    	$scope.programs = data;
+		    }).
+		    error(function(data, status, headers, config) {
+		      // log error
+		    });
+		
+		/*
+		 *Select drop down values for program types 
+		 */
 $scope.programTypes = [
 	                   { label: 'Level', value: 'Level' },
 	                   { label: 'Delta', value: 'Delta' },
@@ -89,7 +133,9 @@ $scope.programTypes = [
 	                   { label: 'Price Relative', value: 'PriceRelative' },
 	                   { label: 'Product', value: 'Product' }
 	                 ];
-
+/*
+ *Select drop down values for Ven Push Level 
+ */
 $scope.venPushLevel = [
 	                   { label: 'Min Event', value: 'MinLevel' },
 	                   { label: 'Full Event', value: 'Full Event' },
@@ -98,41 +144,207 @@ $scope.venPushLevel = [
 	 
 
 
-
+//Set default values of the select drop downs.
 	$scope.ProgramType = $scope.programTypes[0];
 	$scope.VenPushLevel = $scope.venPushLevel[1];
 
-	
+	//Set default values
 	$scope.programs = { DefIssueTime :'10:00', DefStartTime:'12:00' ,DefEventDur:'240'
 	,DefTolStartTime:'0',DefTolStartAfterTime:'0',MinIssueStart:'0'	
 	};
 	 
+	/*
+	 * Called when submit is pressed i.e. ok button
+	 */
 		$scope.submitMyForm=function(){
-        /* while compiling form , angular created this object*/
+
         var data=$scope.programs;  
-     //   alert(data);
+        data.ProgramType=$scope.ProgramType.value;
+        data.VenPushLevel=$scope.VenPushLevel.value;
+        
         /* post to server*/
         $http.post('responseservlet?addProgram=true', data).
         	success(function(data,status,headers,config){
+				/*
+				 * On sucess show a succes message and disappear
+				 */
+        	    var messageTimer = false,
+        	        displayDuration = 3000; // milliseconds 
+        	    
+        	    $scope.showMessage = false;
+        	    $scope.msg = "Sucessfully created program!";
+        	    if (messageTimer) {
+        	            $timeout.cancel(messageTimer);
+        	    }
+        	        
+        	        $scope.showMessage = true;
+        	    
+        	        //When timeout expires redirect to programs page.
+        	        messageTimer = $timeout(function () {
+        	            $scope.showMessage = false;
+        	            $location.path('/programs');
+        	        }, displayDuration);
+        	    
         		
         	}).error(function(data,status,headers,config){
+
+				/*
+				 * On failure show a error message
+				 */
+        	    var messageTimer = false,
+        	        displayDuration = 3000; // milliseconds 
+        	    
+        	    $scope.showErrMessage = false;
+        	    $scope.errMsg = "Error while creating program.";
+        	    if (messageTimer) {
+        	            $timeout.cancel(messageTimer);
+        	    }
+        	        
+        	        $scope.showErrMessage = true;
+        	    
+        	        //When timeout expires redirect to programs page.
+        	        messageTimer = $timeout(function () {
+        	            $scope.showErrMessage = false;
+        	            //$location.path('/programs');
+        	        }, displayDuration);
+        	    
         		
+        	
         	});        
-    }	
+    }
+		
 });
-adrApp.controller('programsController',function($scope,$http){
+
+adrApp.controller('createProgramsController',function($scope,$http,$timeout,$location){
+	
+	/*
+	 * When user clicks on cancel button
+	 */
+	$scope.cancel = function () {
+		  $location.path( '/programs' );
+		};
+
+		/*
+		 *Select drop down values for program types 
+		 */
+$scope.programTypes = [
+	                   { label: 'Level', value: 'Level' },
+	                   { label: 'Delta', value: 'Delta' },
+	                   { label: 'Duty Cycle', value: 'DutyCycle' },
+	                   { label: 'Multiplier', value: 'Multiplier' },
+	                   { label: 'Price', value: 'Price' },
+	                   { label: 'Price Multiplier', value: 'PriceMultiplier' },
+	                   { label: 'Price Relative', value: 'PriceRelative' },
+	                   { label: 'Product', value: 'Product' }
+	                 ];
+/*
+ *Select drop down values for Ven Push Level 
+ */
+$scope.venPushLevel = [
+	                   { label: 'Min Event', value: 'MinLevel' },
+	                   { label: 'Full Event', value: 'Full Event' },
+	                   { label: 'All', value: 'All' }
+	                 ];
+	 
+
+
+//Set default values of the select drop downs.
+	$scope.ProgramType = $scope.programTypes[0];
+	$scope.VenPushLevel = $scope.venPushLevel[1];
+
+	//Set default values
+	$scope.programs = { DefIssueTime :'10:00', DefStartTime:'12:00' ,DefEventDur:'240'
+	,DefTolStartTime:'0',DefTolStartAfterTime:'0',MinIssueStart:'0'	
+	};
+	 
+	/*
+	 * Called when submit is pressed i.e. ok button
+	 */
+		$scope.submitMyForm=function(){
+
+        var data=$scope.programs;  
+        data.ProgramType=$scope.ProgramType.value;
+        data.VenPushLevel=$scope.VenPushLevel.value;
+        
+        /* post to server*/
+        $http.post('responseservlet?addProgram=true', data).
+        	success(function(data,status,headers,config){
+				/*
+				 * On sucess show a succes message and disappear
+				 */
+        	    var messageTimer = false,
+        	        displayDuration = 3000; // milliseconds 
+        	    
+        	    $scope.showMessage = false;
+        	    $scope.msg = "Sucessfully created program!";
+        	    if (messageTimer) {
+        	            $timeout.cancel(messageTimer);
+        	    }
+        	        
+        	        $scope.showMessage = true;
+        	    
+        	        //When timeout expires redirect to programs page.
+        	        messageTimer = $timeout(function () {
+        	            $scope.showMessage = false;
+        	            $location.path('/programs');
+        	        }, displayDuration);
+        	    
+        		
+        	}).error(function(data,status,headers,config){
+
+				/*
+				 * On failure show a error message
+				 */
+        	    var messageTimer = false,
+        	        displayDuration = 3000; // milliseconds 
+        	    
+        	    $scope.showErrMessage = false;
+        	    $scope.errMsg = "Error while creating program.";
+        	    if (messageTimer) {
+        	            $timeout.cancel(messageTimer);
+        	    }
+        	        
+        	        $scope.showErrMessage = true;
+        	    
+        	        //When timeout expires redirect to programs page.
+        	        messageTimer = $timeout(function () {
+        	            $scope.showErrMessage = false;
+        	            //$location.path('/programs');
+        	        }, displayDuration);
+        	    
+        		
+        	
+        	});        
+    }
+		
+		
+});
+
+adrApp.controller('programsController',function($scope,$location,$http,programService){
 	$scope.programs = [];	
 	 $http.get('responseservlet?listPrograms=true').
 	    success(function(data, status, headers, config) {
 	    	$scope.programs = data;	
-	    	    	
+	    	//console.log(data.length);
+	    
+	    	/*angular.forEach($scope.programs,function(program){
+	    		program.links=program.ProgramId;
+	    	});*/
 	    }).
 	    error(function(data, status, headers, config) {
 	      // log error
 	    });
 	
+	 
+	 $scope.edit = function (programId) {
+		// alert(programId);
+		  programService.setProgramId(programId);
+		  $location.path( '/editProgram' );
+		};
 		
 });
+
+
 
 adrApp.controller('clientsController',function($scope){
 	//create a message to display in our view

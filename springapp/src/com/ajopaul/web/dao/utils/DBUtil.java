@@ -58,24 +58,44 @@ public class DBUtil {
 	 * Create tables.
 	 */
 	public static void createTables(Connection connection,String tableName) {
-		    String sqlCreate = "CREATE TABLE IF NOT EXISTS " + tableName
-		            + "  (program_name          TEXT,"
-		            + "   priority            NUMERIC,"
-		            + "   clients          TEXT)";
-
+	
+		    
+		   StringBuilder sqlCreate = new StringBuilder().append("CREATE TABLE IF NOT EXISTS ").append(tableName
+		                                                        ).append("(ProgramId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, " ).append(
+		                                                        "ProgramName TEXT, " ).append(
+		                                                        "ShortName TEXT, " ).append(
+		                                                        "UtilityName TEXT, " ).append(
+		                                                        "Priority  INTEGER, " ).append(
+		                                                        "ProgramType TEXT, " ).append(
+		                                                        "VenPushLevel  TEXT, ").append(
+		                                                        "Description TEXT, " ).append(
+		                                                        "TestProgram INTEGER DEFAULT 0, " ).append(
+		                                                        "CommercialProgram INTEGER DEFAULT 0, " ).append(
+		                                                        "EmergencyDispatch  INTEGER DEFAULT 0, " ).append(
+		                                                        "DayAheadDispatch  INTEGER DEFAULT 0, " ).append(
+		                                                        "DefIssueTime  TEXT, " ).append(
+		                                                        "DefStartTime  TEXT, " ).append(
+		                                                        "DefEventDur INTEGER," ).append(
+		                                                        "DefToleranceStartTime TEXT, " ).append(
+		                                                        "DefToleranceStartAfterTime  TEXT, " ).append(
+		                                                        "MinIssueStart TEXT)" );                                                       
+		                                                        
+		                                                       
+		                                                        
+		    
 		    Statement stmt;
 			try {
 				stmt = connection.createStatement();
-				stmt.execute(sqlCreate);
+				stmt.execute(sqlCreate.toString());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		    
 	}
 
 /**
- * Check if the programs table exists`
+ * Check if the programs table exists
  * @param connection
  */
 	public static boolean checkIfTableExists(Connection connection) {
@@ -98,18 +118,17 @@ public class DBUtil {
 	 * @param query
 	 * @return
 	 */
-	public static List<Object> getProgramBeansFromDB(Connection connection,String query){
-		List<Object> list = new ArrayList<Object>();
+	public static List<ProgramBean> getProgramBeansFromDB(Connection connection,String query){
+		List<ProgramBean> list = new ArrayList<>();
 		ResultSet rs = (ResultSet) getResultSetData(connection, query);
 		if(null != rs){
 			try {
 			while(rs.next()){
-				
-
-					String programName = rs.getString("program_name");
-					int priority = rs.getInt("priority");
-					String clients = rs.getString("clients");
-					ProgramBean pBean = ProgramBeanUtils.getProgramBean(programName, priority, clients);
+					ProgramBean pBean = ProgramBeanUtils.getProgramBean();
+					pBean.setProgramId(rs.getInt("ProgramId"));
+					pBean.setShortName(rs.getString("ShortName"));
+					pBean.setDescription(rs.getString("Description"));
+					pBean.setProgramType(rs.getString("ProgramType"));					
 					list.add(pBean);
 			}
 							
@@ -120,6 +139,34 @@ public class DBUtil {
 		}
 		return list;
 	}
+	
+	
+	 /**
+   * Return list of program beans from DB
+   * @param connection
+   * @param query
+   * @return
+   */
+  public static ProgramBean getProgramBeanFromDB(Connection connection,String query){
+    ProgramBean pBean = ProgramBeanUtils.getProgramBean();
+    ResultSet rs = (ResultSet) getResultSetData(connection, query);
+    if(null != rs){
+      try {
+      if(rs.next()){
+        
+          pBean.setProgramId(rs.getInt("ProgramId"));
+          pBean.setProgramName(rs.getString("ProgramName"));
+          pBean.setShortName(rs.getString("ShortName"));
+          pBean.setDescription(rs.getString("Description"));
+          pBean.setProgramType(rs.getString("ProgramType"));          
+      }
+              
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    return pBean;
+  }
 	/**
 	 * insret a program bean to db.
 	 * @param connection
@@ -127,13 +174,28 @@ public class DBUtil {
 	 * @return
 	 */
 	public static boolean insertProgramBeanData(Connection connection,ProgramBean bean){
-		String sql = "INSERT INTO programs VALUES(?, ?, ?)";
+		String sql = "INSERT INTO programs VALUES(?,?, ?, ?,?,?, ?, ?,?,?, ?, ?,?,?, ?, ?,?,?)";
 		int result = 0;
 		try {
 			PreparedStatement pStmt = connection.prepareStatement(sql);
-			pStmt.setString(1, bean.getProgramName());
-			pStmt.setInt(2, bean.getPriority());
-			pStmt.setString(3, bean.getClients());
+		  pStmt.setString(2, bean.getProgramName());
+      pStmt.setString(3, bean.getShortName());
+      pStmt.setString(4, bean.getUtilityName());
+      pStmt.setInt(5, bean.getPriority());
+      pStmt.setString(6, bean.getProgramType());
+      pStmt.setString(7, bean.getVenPushLevel());
+      pStmt.setString(8, bean.getDescription());
+      pStmt.setInt(9, bean.getTestProgram()?1:0);
+      pStmt.setInt(10, bean.getCommProgram()?1:0);
+      pStmt.setInt(11, bean.getEmDispatch()?1:0);
+      pStmt.setInt(12, bean.getDayAheadDispatch()?1:0);
+			pStmt.setString(13, bean.getDefIssueTime());
+			pStmt.setString(14, bean.getDefStartTime());
+			pStmt.setInt(15, bean.getDefEventDur());
+			pStmt.setString(16, bean.getDefTolStartTime());
+      pStmt.setString(17, bean.getDefTolStartAfterTime());
+      pStmt.setString(18, bean.getMinIssueStart());
+    
 			result = pStmt.executeUpdate();
 			log.info("finished inserting data");
 			System.out.println("Finished inserting yo!");

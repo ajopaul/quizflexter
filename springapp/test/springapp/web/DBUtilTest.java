@@ -17,7 +17,7 @@ import com.ajopaul.web.dao.utils.DBUtil;
 public class DBUtilTest extends TestCase{
 	
 	Connection connection = null;
-	String dbQuery = "jdbc:sqlite:springdbfile.db";
+	String dbQuery = "jdbc:sqlite:adrtest.db";
 	@Override
 	protected void setUp() throws Exception {
 		connection = DBUtil.getDatabaseConnection(dbQuery);
@@ -64,7 +64,7 @@ public class DBUtilTest extends TestCase{
 	}
 	
 	public void testProgramBeansListSize(){
-		List<Object> list = DBUtil.getProgramBeansFromDB(connection, "select * from programs");
+		List<ProgramBean> list = DBUtil.getProgramBeansFromDB(connection, "select * from programs");
 		assertNotNull(list);
 	}
 	
@@ -75,7 +75,10 @@ public class DBUtilTest extends TestCase{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		boolean result = DBUtil.insertProgramBeanData(connection, ProgramBeanUtils.getProgramBean("test", 1, "test"));
+		ProgramBean programBean = getSampleProgramBean();
+		
+
+		boolean result = DBUtil.insertProgramBeanData(connection, programBean);
 		assertTrue(result);
 		try {
 			connection.rollback();
@@ -84,6 +87,29 @@ public class DBUtilTest extends TestCase{
 			e.printStackTrace();
 		}
 	}
+
+  private ProgramBean getSampleProgramBean()
+  {
+    ProgramBean programBean = ProgramBeanUtils.getProgramBean();
+		programBean.setProgramName("sampleprogramName");
+		programBean.setShortName("sampleshortName");
+		programBean.setUtilityName("sampleutility");
+		programBean.setPriority(100);
+		programBean.setProgramType("level");
+		programBean.setVenPushLevel("full event");
+		programBean.setDescription("sampledescName");
+		programBean.setTestProgram(true);
+		programBean.setCommProgram(true);
+		programBean.setEmDispatch(true);
+		programBean.setDayAheadDispatch(true);
+		programBean.setDefIssueTime("01");
+		programBean.setDefStartTime("11");
+		programBean.setDefEventDur(200);
+		programBean.setDefTolStartTime("11");
+		programBean.setDefTolStartAfterTime("32");
+		programBean.setMinIssueStart("11");
+    return programBean;
+  }
 	
 	public void testCheckIfTablesExist(){
 		DBUtil.createTables(connection,"programs");
@@ -91,7 +117,7 @@ public class DBUtilTest extends TestCase{
 	}
 	
 	public void testJsonData(){
-		ProgramBean bean = ProgramBeanUtils.getProgramBean("Prog", 1, "clients all");
+		ProgramBean bean = ProgramBeanUtils.getProgramBean();
 		JSONObject obj = new JSONObject(bean);
 		System.out.println("Obj "+obj);
 	}
