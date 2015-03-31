@@ -167,6 +167,27 @@ public class DBUtil {
     }
     return pBean;
   }
+  
+  /**
+   * Delete a program
+   * @param connection
+   * @param query
+   * @return
+   */
+  public static boolean deleteProgramFromDB(Connection connection,String query){
+    boolean isDeleteSuccess = false;
+    
+    try{
+        Statement stmt = connection.createStatement();
+        int returnRes = stmt.executeUpdate(query);
+        isDeleteSuccess = (returnRes > 0)?true:false;
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    
+    return isDeleteSuccess;
+  }
+  
 	/**
 	 * insret a program bean to db.
 	 * @param connection

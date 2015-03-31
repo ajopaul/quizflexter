@@ -4,15 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONArray;
 
 import com.ajopaul.pojos.ProgramBean;
 import com.ajopaul.web.dao.utils.DBUtil;
@@ -32,7 +32,11 @@ public class ResponseServlet extends HttpServlet
       }else if(null != req.getParameter("addProgram")){
         doAddProgram(req, resp);
       }else if(null != req.getParameter("editProgram")){
-        dpEditProgra(req,resp);
+        doEditProgram(req,resp);
+      }else if(null != req.getParameter("editUpdateProgram")){
+        doEditUpdateProgram(req,resp);
+      }else if(null != req.getParameter("deleteProgram")){
+        doDeleteProgram(req,resp);
       }else{
     	  try{
     	  doAddProgram(req, resp);
@@ -42,7 +46,58 @@ public class ResponseServlet extends HttpServlet
       }
     }
     
-    public void dpEditProgra(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public void doEditProgram(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+
+      log.info("Requested for data ");
+      Connection connection = DBUtil.getDatabaseConnection(dbQuery);
+      if(null != connection){
+        Integer programId = Integer.parseInt(req.getParameter("programId"));
+        ProgramBean brean = DBUtil.getProgramBeanFromDB(connection, "Select * from programs where ProgramId="+programId.intValue());
+        
+        Gson gson = new Gson();
+        String data = gson.toJson(brean);
+        log.info("JSon data\n"+data);
+        PrintWriter out = resp.getWriter();
+        out.print(data);
+      }else{
+        log.info("Connection is null");
+      }
+ 
+    DBUtil.closeAll(connection,null,null);
+      
+    }
+    /**
+     * Perform delete of a program
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
+    public void doDeleteProgram(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+
+      log.info("Requested for data ");
+      Connection connection = DBUtil.getDatabaseConnection(dbQuery);
+      if(null != connection){
+        Integer programId = Integer.parseInt(req.getParameter("programId"));
+        boolean result = DBUtil.deleteProgramFromDB(connection, "delete from programs where ProgramId="+programId.intValue());
+        
+        Map<String,String> resultMap = new HashMap<>();
+        resultMap.put("result", String.valueOf(result));
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(resultMap);
+        log.info("JSon data\n"+jsonData);
+        PrintWriter out = resp.getWriter();
+        out.print(jsonData);
+      }else{
+        log.info("Connection is null");
+      }
+ 
+    DBUtil.closeAll(connection,null,null);
+      
+    }
+    
+    public void doEditUpdateProgram(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
 
       log.info("Requested for data ");
