@@ -232,6 +232,12 @@ $scope.venPushLevel = [
 	,DefTolStartTime:'0',DefTolStartAfterTime:'0',MinIssueStart:'0'	
 	};
 	 
+//Validation for priority
+	$scope.priority = {
+	        text: '99',
+	        numbers: /^\d+$/
+	      };
+	
 	/*
 	 * Called when submit is pressed i.e. ok button
 	 */

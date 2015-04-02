@@ -2,7 +2,7 @@
 	<div class="row clearfix">
 
 
-		<form class="form-horizontal" ng-submit="submitMyForm()">
+		<form name="programForm" class="form-horizontal" ng-submit="submitMyForm()">
 			<fieldset>
 
 				<!-- Form Name -->
@@ -20,13 +20,14 @@
 						Name</label>
 					<div class="col-md-3">
 						<input id="programName"  type="text"
-							placeholder="Enter program name" class="form-control input-md"
+							placeholder="Enter program name" required class="form-control input-md"
 							ng-model="programs.ProgramName">
+							<span class="error" ng-show="programs-form.programName.$error.required">Required!</span>
 					</div>
 					<label class="col-md-2 control-label" for="textinput">Short
 						Name</label>
 					<div class="col-md-3">
-						<input id="textinput" name="textinput" type="text"
+						<input id="shortname" name="shortname" required type="text"
 							placeholder="Enter short name" class="form-control input-md"
 							ng-model="programs.ShortName">
 					</div>
@@ -35,16 +36,20 @@
 					<label class="col-md-2 control-label" for="textinput">Utility
 						Name</label>
 					<div class="col-md-3">
-						<input id="textinput" name="textinput" type="text"
+						<input id="utiltity" name="utiltity" type="text"
 							placeholder="Enter utility name" class="form-control input-md"
 							ng-model="programs.UtilityName">
 					</div>
 
-					<label class="col-md-2 control-label" for="textinput">Priority</label>
+					<label class="col-md-2 control-label" for="priority">Priority</label>
 					<div class="col-md-3">
-						<input id="textinput" name="textinput" type="text"
-							placeholder="Enter priority" class="form-control input-md"
-							ng-model="programs.Priority">
+						<input id="priority" name="priority" type="number" required 
+							placeholder="Enter priority" ng-pattern="/^[0-9]{1,7}$/" class="form-control input-md" ng-model="programs.Priority">
+							<span class="error" ng-show="programForm.priority.$error.pattern">Numbers only!</span>
+							<!-- <input type="number" ng-model="price" name="price_field"  ng-pattern="/^[0-9]{1,7}$/" required>
+						    <span ng-show="programForm.price_field.$error.pattern">Not a valid number!</span>
+						    <span ng-show="myForm.price_field.$error.required">This field is required!</span> -->
+    
 					</div>
 
 				</div>

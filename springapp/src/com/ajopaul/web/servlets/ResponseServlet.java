@@ -45,7 +45,12 @@ public class ResponseServlet extends HttpServlet
     	  }
       }
     }
-    
+    /**
+     * Return the parameters for the given program id
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     public void doEditProgram(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
 
