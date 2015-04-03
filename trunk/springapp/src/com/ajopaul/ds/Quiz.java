@@ -197,16 +197,47 @@ Outptu: 5, 5
 	  
 	  return intArry.toArray(new Integer[intArry.size()]);
 	}
+	
+	static void printReverse(int... array){
+	  for(int i=0;i<array.length/2;i++){
+	    int temp  = array[i];
+	    array[i]=array[array.length-(i+1)];
+	    array[array.length-(i+1)] = temp;
+	  }
+	  System.out.println("Result");
+	  for(int i=0;i<array.length;i++){
+	    System.out.print(array[i]+" ");
+	  }
+	}
+	
+	static void sortArray(int...array){
+	  for(int i=0;i<array.length;i++){
+	    for(int j=i+1;j<array.length;j++){
+	      if(array[i] > array[j]){
+	        int temp = array[i];
+	        array[i]=array[j];
+	        array[j]=temp;
+	      }
+	    }
+	  }
+	  
+	  System.out.println("Result");
+    for(int i=0;i<array.length;i++){
+      System.out.print(array[i]+" ");
+    }
+	}
 
 	public static void main(String... args){
 	//System.out.println(isStringUnique2("london"));
 		//System.out.println(reverse("tomcat"));
 	//System.out.println(isStringPermutation3("london", "ldonnno"));
-	 List<Integer[]> list = new ArrayList<>();
+	/* List<Integer[]> list = new ArrayList<>();
 	 list.add(new Integer[] {1, 5, 10, 20, 40, 80});
 	 list.add(new Integer[] {6, 7, 20, 80, 100,10});
 	 list.add(new Integer[] {3, 4, 15, 20, 30, 70, 80,10, 120} );
 	 list.add(new Integer[] {10,30,40,50,80,20} );
-	 printCommonElements(list);
+	 printCommonElements(list);*/
+	  //printReverse(new int[] {3, 4, 15, 20, 30, 70, 80,10, 120});
+	  sortArray(new int[] {13, 4, 15, 20, 30, 70, 80,10, 120});
 	}
 }
